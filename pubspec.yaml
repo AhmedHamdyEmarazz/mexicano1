@@ -38,12 +38,8 @@ flutter:
   uses-material-design: true
   assets:
       - assets/balaha.jpeg
-      - assets/balaha1.jpeg
-      - assets/LottieLogo1.json
-      - assets/balaha1.mp3
-      - assets/balahax.mp3
-      - assets/balaha.mp4
-      - assets/balahaz.mp3
+      - assets/balaha1.jpeg      
+      - assets/balahax.jpeg    
       - assets/mexicano.jpeg
-      - assets/dates.jpeg
-      - assets/lock.jpeg
+      - assets/balahaz.mp3    
+

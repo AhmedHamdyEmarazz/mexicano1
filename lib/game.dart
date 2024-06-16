@@ -114,7 +114,7 @@ class _GameState extends State<Game> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    title = 'Save The BALa7a';
+    title = 'Mexicano\'s Save';
 
     return Scaffold(
       appBar: AppBar(
@@ -122,41 +122,50 @@ class _GameState extends State<Game> {
           const SizedBox(
             width: 20,
           ),
-          IconButton(
-            icon: Icon(
-              !pause2 ? Icons.music_note_sharp : Icons.music_off,
-              size: size.height * 0.05,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              if (first2 == true) {
-                player2.playOrPause();
-                player2.loopMode;
-              }
-              if (first2 == false) {
-                player2.open(
-                  Audio("assets/balaha1.mp3"),
-                );
-              }
-
-              setState(() {
-                first2 = true;
-                pause2 = !pause2;
-                //   pause1 = false;
-                //    pause3 = false;
-              });
-              // music1(false);
-              // music3(false);
-              //   music2(pause2);
-              // player3.pause();
-              //    player.pause();
-              // !pause
-              //     ? await player.play(UrlSource(
-              //         'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
-              //     : player.pause();
-            },
+          Text(
+            'balaha',
+            style: TextStyle(color: Colors.amber.withOpacity(0.0)),
           )
         ],
+        // actions: <Widget>[
+        //   const SizedBox(
+        //     width: 20,
+        //   ),
+        //   IconButton(
+        //     icon: Icon(
+        //       !pause2 ? Icons.music_note_sharp : Icons.music_off,
+        //       size: size.height * 0.05,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () async {
+        //       if (first2 == true) {
+        //         player2.playOrPause();
+        //         player2.loopMode;
+        //       }
+        //       if (first2 == false) {
+        //         player2.open(
+        //           Audio("assets/balaha1.mp3"),
+        //         );
+        //       }
+
+        //       setState(() {
+        //         first2 = true;
+        //         pause2 = !pause2;
+        //         //   pause1 = false;
+        //         //    pause3 = false;
+        //       });
+        //       // music1(false);
+        //       // music3(false);
+        //       //   music2(pause2);
+        //       // player3.pause();
+        //       //    player.pause();
+        //       // !pause
+        //       //     ? await player.play(UrlSource(
+        //       //         'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
+        //       //     : player.pause();
+        //     },
+        //   )
+        // ],
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -437,7 +446,6 @@ class _GameState extends State<Game> {
               ),
             ]),
           ),
-
           Stack(children: [
             Container(
                 width: size.width,
@@ -497,45 +505,7 @@ class _GameState extends State<Game> {
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.3),
                     )),
-                // InkWell(
-                //   splashColor: Colors.red,
-                //   hoverColor: Colors.red,
-                //   highlightColor: Colors.red,
-                //   focusColor: Colors.red,
-                //   onTap: () {
-                //     setState(() {
-                //       ghost = !ghost;
-                //     });
-                //     // !ghost
-                //     //     ? setState(() {
-                //     //         surprise = false;
-                //     //       })
-                //     //     : null;
-                //   },
-                //   // child: Container(
-                //   //   width: size.width * 0.4,
-                //   //   height: size.height * 0.08,
-
-                //   //   padding: const EdgeInsets.all(2),
-                //   //   decoration: BoxDecoration(
-                //   //     // color: Colors.white.withOpacity(0.0),
-                //   //     border: Border.all(color: Colors.blueGrey),
-                //   //     borderRadius:
-                //   //         const BorderRadius.all(Radius.circular(7.0)),
-                //   //   ),
-                //   //   alignment: Alignment.center,
-                //  child:
                 AnimatedTextKit(
-                  // onTap: () {
-                  //   setState(() {
-                  //     ghost = !ghost;
-                  //   });
-                  //   // !ghost
-                  //   //     ? setState(() {
-                  //   //         surprise = false;
-                  //   //       })
-                  //   //     : null;
-                  // },
                   animatedTexts: [
                     ScaleAnimatedText(
                       !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
@@ -564,18 +534,9 @@ class _GameState extends State<Game> {
                   pause: Duration(milliseconds: 50),
                   // isRepeatingAnimation: false,
                   onNext: (p0, p1) {
-                    setState(() {
-                      //  tex = !tex;
-                    });
+                    setState(() {});
                   },
                 ),
-
-                //  Text(
-                //                       '☠️\nGhost Mode',
-                //                       textAlign: TextAlign.center,
-                //                       style: TextStyle(
-                //                           fontSize: size.height * 0.02, color: Colors.red),
-                //                     ),
                 InkWell(
                   splashColor: ghost ? Colors.green : Colors.red,
                   hoverColor: ghost ? Colors.green : Colors.red,
@@ -585,24 +546,7 @@ class _GameState extends State<Game> {
                     setState(() {
                       ghost = !ghost;
                     });
-                    // !ghost
-                    //     ? setState(() {
-                    //         surprise = false;
-                    //       })
-                    //     : null;
                   },
-                  // child: Container(
-                  //   width: size.width * 0.4,
-                  //   height: size.height * 0.08,
-
-                  //   padding: const EdgeInsets.all(2),
-                  //   decoration: BoxDecoration(
-                  //     // color: Colors.white.withOpacity(0.0),
-                  //     border: Border.all(color: Colors.blueGrey),
-                  //     borderRadius:
-                  //         const BorderRadius.all(Radius.circular(7.0)),
-                  //   ),
-                  //   alignment: Alignment.center,
                   child: Container(
                     width: size.width * 0.4,
                     height: size.height * 0.08,
@@ -615,7 +559,26 @@ class _GameState extends State<Game> {
                     ),
                     alignment: Alignment.center,
                   ),
-                )
+                ),
+                Positioned(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          move = !move;
+                          opa = false;
+                          opaa = false;
+                          fly = true;
+                          jump = false;
+                          hold = false;
+                          random = new Random();
+                          //  surprise = false;
+                          num = 2;
+                          print('hello');
+                        });
+                      },
+                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                  left: size.width * 0.85,
+                ),
               ],
             ),
             AnimatedPositioned(
@@ -660,18 +623,7 @@ class _GameState extends State<Game> {
                     setState(() {
                       first = true;
                       pause1 = !pause1;
-                      //  pause2 = false;
-                      //    pause3 = false;
                     });
-                    // music1(false);
-                    // music3(false);
-                    //   music2(pause2);
-                    // player3.pause();
-                    //   player2.pause();
-                    // !pause
-                    //     ? await player.play(UrlSource(
-                    //         'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
-                    //     : player.pause();
                   },
                   icon: Column(
                     children: [
@@ -766,28 +718,6 @@ class _GameState extends State<Game> {
                   )),
             ),
           ]),
-
-          // IconButton(
-          //     onPressed: () {
-          //       setState(() {
-          //         bigger = !bigger;
-          //         // red = !red;
-          //       });
-          //     },
-          //     icon: Icon(
-          //       Icons.change_circle,
-          //       size: 30,
-          //     )),
-          // // Load a Lottie file from your assets
-          // Container(
-          //     height: 180, child: Lottie.asset('assets/LottieLogo1.json')),
-
-          // // Load a Lottie file from a remote url
-          // Lottie.network(
-          //     'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
-
-          // // Load an animation and its images from a zip file
-          // //  Lottie.asset('assets/lottiefiles/angel.zip'),
         ],
       ),
       floatingActionButton: FloatingActionButton(

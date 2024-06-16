@@ -21,22 +21,22 @@ class _FirstThemeState extends State<FirstTheme> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset('assets/balaha.mp4')
-      ..addListener(() {
-        setState(() {});
-      })
-      //  ..setLooping(true)
-      ..initialize().then((_) {
-        controller.play();
-        setState(() {});
-      });
+    // controller = VideoPlayerController.asset('assets/balaha.mp4')
+    //   ..addListener(() {
+    //     setState(() {});
+    //   })
+    //   //  ..setLooping(true)
+    //   ..initialize().then((_) {
+    //     controller.play();
+    //     setState(() {});
+    //   });
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,30 +82,36 @@ class _FirstThemeState extends State<FirstTheme> {
                   ]),
               width: double.infinity,
               height: size.height * 0.12,
-              child: controller.value.isInitialized
-                  ? Container(
-                      width: size.width * 0.17,
-                      constraints:
-                          BoxConstraints(maxHeight: size.height * 0.24),
-                      padding: const EdgeInsets.all(0),
-                      //    margin: const EdgeInsets.only(left: 5, right: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.0),
-                        // borderRadius:
-                        //     const BorderRadius.all(Radius.circular(7.0)),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          controller.play();
-                        },
-                        child: ClipOval(child: VideoPlayer(controller)
-                            //  color: Color.fromARGB(255, 226, 219, 157),
-                            ),
-                      ))
+              child: // controller.value.isInitialized
+                  //     ?
+                  Container(
+                width: size.width * 0.17,
+                constraints: BoxConstraints(maxHeight: size.height * 0.24),
+                padding: const EdgeInsets.all(0),
+                //    margin: const EdgeInsets.only(left: 5, right: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.0),
+                  // borderRadius:
+                  //     const BorderRadius.all(Radius.circular(7.0)),
+                ),
+                // child: GestureDetector(
+                //   onTap: () {
+                //     controller.play();
+                //   },
+                child: ClipOval(
+                    child: Image.asset(
+                  'assets/balahax.jpeg',
+                  fit: BoxFit.contain,
+                ) // VideoPlayer(controller)
+                    //  color: Color.fromARGB(255, 226, 219, 157),
+                    //  ),
+                    ),
+              )
 // ClipRRect(
 //                           borderRadius: BorderRadius.circular(20.0),
 //                           child: VideoPlayer(controller)))
-                  : Text('🫘')),
+              //    : Text('🫘')
+              ),
         ),
       ),
       body: Center(
@@ -145,7 +151,7 @@ class _FirstThemeState extends State<FirstTheme> {
                         },
                         animatedTexts: [
                           ScaleAnimatedText(
-                            'Save the Bala7a !',
+                            'Mexicano\'s Save!',
                             textAlign: TextAlign.center,
                             scalingFactor: 2,
                             textStyle: GoogleFonts.aclonica(
@@ -155,7 +161,7 @@ class _FirstThemeState extends State<FirstTheme> {
                             duration: Duration(milliseconds: 1500),
                           ),
                           ScaleAnimatedText(
-                            'Save the Bala7a !',
+                            'Mexicano\'s Save!',
                             textAlign: TextAlign.center,
                             scalingFactor: 0.5,
                             textStyle: GoogleFonts.aclonica(
@@ -208,7 +214,7 @@ class _FirstThemeState extends State<FirstTheme> {
                         },
                         animatedTexts: [
                           ScaleAnimatedText(
-                            'Hit the Bala7a !',
+                            'Mexicano\'s Hit!',
                             textAlign: TextAlign.center,
                             scalingFactor: 2,
                             textStyle: GoogleFonts.aclonica(
@@ -218,7 +224,7 @@ class _FirstThemeState extends State<FirstTheme> {
                             duration: Duration(milliseconds: 1500),
                           ),
                           ScaleAnimatedText(
-                            'Hit the Bala7a !',
+                            'Mexicano\'s Hit!',
                             textAlign: TextAlign.center,
                             scalingFactor: 0.5,
                             textStyle: GoogleFonts.aclonica(

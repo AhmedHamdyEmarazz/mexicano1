@@ -112,7 +112,7 @@ class _Game2State extends State<Game2> {
     final size = MediaQuery.of(context).size;
     int randomNumber = random.nextInt(90) + 10;
 
-    title = 'Hit The BALa7a';
+    title = 'Mexicano\'s Hit';
 
     return Scaffold(
       appBar: AppBar(
@@ -120,53 +120,45 @@ class _Game2State extends State<Game2> {
           const SizedBox(
             width: 20,
           ),
-          IconButton(
-            icon: Icon(
-              !pause2 ? Icons.music_note_sharp : Icons.music_off,
-              size: size.height * 0.05,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              if (first2 == true) {
-                player2.playOrPause();
-                player2.loopMode;
-              }
-              if (first2 == false) {
-                player2.open(
-                  Audio("assets/balahax.mp3"),
-                );
-              }
-
-              setState(() {
-                first2 = true;
-                pause2 = !pause2;
-                // pause1 = false;
-                //    pause3 = false;
-              });
-              // music1(false);
-              // music3(false);
-              //   music2(pause2);
-              // player3.pause();
-              //  player.pause();
-              // !pause
-              //     ? await player.play(UrlSource(
-              //         'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
-              //     : player.pause();
-            },
+          Text(
+            'balaha',
+            style: TextStyle(color: Colors.amber.withOpacity(0.0)),
           )
         ],
+        // actions: <Widget>[
+        //   const SizedBox(
+        //     width: 20,
+        //   ),
+        //   IconButton(
+        //     icon: Icon(
+        //       !pause2 ? Icons.music_note_sharp : Icons.music_off,
+        //       size: size.height * 0.05,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () async {
+        //       if (first2 == true) {
+        //         player2.playOrPause();
+        //         player2.loopMode;
+        //       }
+        //       if (first2 == false) {
+        //         player2.open(
+        //           Audio("assets/balahax.mp3"),
+        //         );
+        //       }
+
+        //       setState(() {
+        //         first2 = true;
+        //         pause2 = !pause2;
+
+        //       });
+
+        //     },
+        //   )
+        // ],
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ElevatedButton(
-            //     onPressed: () {
-            //       setState(() {
-            //         move = false;
-            //         opa = false;
-            //       });
-            //     },
-            //     child: Text('reassemble')),
             GestureDetector(
                 onTap: () {
                   setState(() {
@@ -244,83 +236,6 @@ class _Game2State extends State<Game2> {
                           },
                         ),
                 )),
-//             ElevatedButton(
-//               style: const ButtonStyle(
-//                 textStyle: MaterialStatePropertyAll<TextStyle>(
-//                   TextStyle(
-//                     fontSize: 10,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//                 alignment: Alignment.center,
-//                 //   fixedSize: MaterialStatePropertyAll<Size>(size * 0.02)
-//                 //    iconSize: MaterialStatePropertyAll<double>(4
-//               ),
-//               onPressed: () {
-//                 setState(() {
-//                   move = !move;
-//                   opa = false;
-//                   opaa = false;
-//                   fly = true;
-//                   slap = false;
-//                   hold = false;
-//                   num = 2;
-//                   print('hello');
-//                 });
-//               },
-//               child: move
-//                   ?
-// // Container(
-// //                       height: size.height * 0.01,
-// //                       width: size.width * 0.08,
-// //                       child:
-//                   const Text('restart')
-// //)
-//                   : AnimatedTextKit(
-//                       onTap: () {
-//                         setState(() {
-//                           move = !move;
-//                           opa = false;
-//                           opaa = false;
-//                           fly = true;
-//                           slap = false;
-//                           hold = false;
-//                           num = 2;
-//                           print('hello');
-//                         });
-//                       },
-//                       animatedTexts: [
-//                         ScaleAnimatedText(
-//                           'START !',
-//                           textAlign: TextAlign.center,
-//                           scalingFactor: 2,
-//                           textStyle: GoogleFonts.aclonica(
-//                               //   fontSize: 25,
-//                               fontWeight: FontWeight.w200,
-//                               fontStyle: FontStyle.italic),
-//                           duration: const Duration(milliseconds: 1500),
-//                         ),
-//                         ScaleAnimatedText(
-//                           'START !',
-//                           textAlign: TextAlign.center,
-//                           scalingFactor: 0.5,
-//                           textStyle: GoogleFonts.aclonica(
-//                               //     fontSize: 25,
-//                               fontWeight: FontWeight.w200,
-//                               fontStyle: FontStyle.italic),
-//                           duration: const Duration(milliseconds: 1500),
-//                         ),
-//                       ],
-//                       repeatForever: true,
-//                       pause: const Duration(milliseconds: 50),
-//                       // isRepeatingAnimation: false,
-//                       onNext: (p0, p1) {
-//                         setState(() {
-//                           //  tex = !tex;
-//                         });
-//                       },
-//                     ),
-//             ),
           ],
         ),
         backgroundColor: Colors.indigo.shade500,
@@ -603,45 +518,7 @@ class _Game2State extends State<Game2> {
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.3),
                     )),
-                // InkWell(
-                //   splashColor: Colors.red,
-                //   hoverColor: Colors.red,
-                //   highlightColor: Colors.red,
-                //   focusColor: Colors.red,
-                //   onTap: () {
-                //     setState(() {
-                //       ghost = !ghost;
-                //     });
-                //     // !ghost
-                //     //     ? setState(() {
-                //     //         surprise = false;
-                //     //       })
-                //     //     : null;
-                //   },
-                //   // child: Container(
-                //   //   width: size.width * 0.4,
-                //   //   height: size.height * 0.08,
-
-                //   //   padding: const EdgeInsets.all(2),
-                //   //   decoration: BoxDecoration(
-                //   //     // color: Colors.white.withOpacity(0.0),
-                //   //     border: Border.all(color: Colors.blueGrey),
-                //   //     borderRadius:
-                //   //         const BorderRadius.all(Radius.circular(7.0)),
-                //   //   ),
-                //   //   alignment: Alignment.center,
-                //  child:
                 AnimatedTextKit(
-                  // onTap: () {
-                  //   setState(() {
-                  //     ghost = !ghost;
-                  //   });
-                  //   // !ghost
-                  //   //     ? setState(() {
-                  //   //         surprise = false;
-                  //   //       })
-                  //   //     : null;
-                  // },
                   animatedTexts: [
                     ScaleAnimatedText(
                       !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
@@ -670,18 +547,9 @@ class _Game2State extends State<Game2> {
                   pause: Duration(milliseconds: 50),
                   // isRepeatingAnimation: false,
                   onNext: (p0, p1) {
-                    setState(() {
-                      //  tex = !tex;
-                    });
+                    setState(() {});
                   },
                 ),
-
-                //  Text(
-                //                       '☠️\nGhost Mode',
-                //                       textAlign: TextAlign.center,
-                //                       style: TextStyle(
-                //                           fontSize: size.height * 0.02, color: Colors.red),
-                //                     ),
                 InkWell(
                   splashColor: ghost ? Colors.green : Colors.red,
                   hoverColor: ghost ? Colors.green : Colors.red,
@@ -691,24 +559,7 @@ class _Game2State extends State<Game2> {
                     setState(() {
                       ghost = !ghost;
                     });
-                    // !ghost
-                    //     ? setState(() {
-                    //         surprise = false;
-                    //       })
-                    //     : null;
                   },
-                  // child: Container(
-                  //   width: size.width * 0.4,
-                  //   height: size.height * 0.08,
-
-                  //   padding: const EdgeInsets.all(2),
-                  //   decoration: BoxDecoration(
-                  //     // color: Colors.white.withOpacity(0.0),
-                  //     border: Border.all(color: Colors.blueGrey),
-                  //     borderRadius:
-                  //         const BorderRadius.all(Radius.circular(7.0)),
-                  //   ),
-                  //   alignment: Alignment.center,
                   child: Container(
                     width: size.width * 0.4,
                     height: size.height * 0.08,
@@ -721,7 +572,25 @@ class _Game2State extends State<Game2> {
                     ),
                     alignment: Alignment.center,
                   ),
-                )
+                ),
+                Positioned(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          move = !move;
+                          opa = false;
+                          opaa = false;
+                          fly = true;
+                          slap = false;
+                          hold = false;
+                          num = 2;
+                          random = new Random();
+                          print('hello');
+                        });
+                      },
+                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                  left: size.width * 0.85,
+                ),
               ],
             ),
             AnimatedPositioned(
