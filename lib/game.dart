@@ -512,7 +512,7 @@ class _GameState extends State<Game> {
               ),
             ),
             Stack(
-              alignment: Alignment.center,
+              alignment: Alignment.topCenter, //TODO:
               children: [
                 Container(
                     width: size.width,
@@ -520,7 +520,29 @@ class _GameState extends State<Game> {
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.3),
                     )),
-                AnimatedTextKit(
+                     InkWell(
+                  splashColor: ghost ? Colors.green : Colors.red,
+                  hoverColor: ghost ? Colors.green : Colors.red,
+                  highlightColor: ghost ? Colors.green : Colors.red,
+                  focusColor: ghost ? Colors.green : Colors.red,
+                  onTap: () {
+                    setState(() {
+                      ghost = !ghost;
+                    });
+                  },
+                  child: Container(
+                    width: size.width * 0.4,
+                    height: size.height * 0.08,
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      // color: Colors.white.withOpacity(0.0),
+                      border: Border.all(color: Colors.blueGrey),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(7.0)),
+                    ),
+                    alignment: Alignment.center,
+                    child:
+                     AnimatedTextKit(
                   animatedTexts: [
                     ScaleAnimatedText(
                       !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
@@ -552,29 +574,10 @@ class _GameState extends State<Game> {
                     setState(() {});
                   },
                 ),
-                InkWell(
-                  splashColor: ghost ? Colors.green : Colors.red,
-                  hoverColor: ghost ? Colors.green : Colors.red,
-                  highlightColor: ghost ? Colors.green : Colors.red,
-                  focusColor: ghost ? Colors.green : Colors.red,
-                  onTap: () {
-                    setState(() {
-                      ghost = !ghost;
-                    });
-                  },
-                  child: Container(
-                    width: size.width * 0.4,
-                    height: size.height * 0.08,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      // color: Colors.white.withOpacity(0.0),
-                      border: Border.all(color: Colors.blueGrey),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(7.0)),
-                    ),
-                    alignment: Alignment.center,
                   ),
                 ),
+               
+               
                 Positioned(
                   child: IconButton(
                       onPressed: () {
