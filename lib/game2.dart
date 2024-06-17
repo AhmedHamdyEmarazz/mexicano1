@@ -240,44 +240,61 @@ class _Game2State extends State<Game2> {
         ),
         backgroundColor: Colors.indigo.shade500,
         toolbarHeight: size.height * 0.14,
-        //   leadingWidth: double.infinity,
+         //  leadingWidth: 0,
         bottom: PreferredSize(
           preferredSize: size * 0.08,
-          child: Container(
-            alignment: Alignment.centerLeft,
-            decoration:
-                BoxDecoration(color: Colors.indigo.shade400, boxShadow: const [
-              BoxShadow(
-                  color: Color.fromARGB(27, 0, 0, 0),
-                  spreadRadius: 0.8,
-                  offset: Offset(0, 4))
-            ]),
-            width: double.infinity,
-            height: size.height * 0.12,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: //20
-                      size.width * 0.06,
-                ),
-                Container(
-                  width: //20
-                      size.width * 0.9,
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.aclonica(
-                        letterSpacing: size.width * 0.28 / title.length,
-                        fontSize: size.height * 0.3 / title.length,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal),
+          child: SafeArea(
+            child:
+            Platform.isIOS ? 
+            Text(
+                        textAlign: TextAlign.center,
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.aclonica(
+                            letterSpacing: size.width * 0.28 / title.length,
+                            fontSize: size.height * 0.3 / title.length,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal),
+                  
+            ):
+            
+             Container(
+              alignment: Alignment.centerLeft,
+              decoration:
+                  BoxDecoration(color: Colors.indigo.shade400, boxShadow: const [
+                BoxShadow(
+                    color: Color.fromARGB(27, 0, 0, 0),
+                    spreadRadius: 0.8,
+                    offset: Offset(0, 4))
+              ]),
+              width:size.width, //double.infinity,
+              height: size.height * 0.12,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: //20
+                        size.width * 0.06,
                   ),
-                ),
-              ],
+                  Container(
+                    width: //20
+                        size.width * 0.9,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.aclonica(
+                          letterSpacing: size.width * 0.28 / title.length,
+                          fontSize: size.height * 0.3 / title.length,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.normal),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

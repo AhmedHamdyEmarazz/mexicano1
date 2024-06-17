@@ -266,7 +266,22 @@ class _GameState extends State<Game> {
         //   leadingWidth: double.infinity,
         bottom: PreferredSize(
           preferredSize: size * 0.08,
-          child: Container(
+          child: 
+            Platform.isIOS ? 
+            Text(
+                        textAlign: TextAlign.center,
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.aclonica(
+                            letterSpacing: size.width * 0.28 / title.length,
+                            fontSize: size.height * 0.3 / title.length,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal),
+                  
+            ):
+          
+          Container(
             alignment: Alignment.centerLeft,
             decoration:
                 BoxDecoration(color: Colors.indigo.shade400, boxShadow: const [
