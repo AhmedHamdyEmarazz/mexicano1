@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:amit/drawer.dart';
 import 'package:amit/game.dart';
@@ -6,7 +6,7 @@ import 'package:amit/game2.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preference_app_group/shared_preference_app_group.dart';
+//import 'package:shared_preference_app_group/shared_preference_app_group.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -33,9 +33,9 @@ class _FirstThemeState extends State<FirstTheme> {
     //     controller.play();
     //     setState(() {});
     //   });
-    Platform.isIOS
-        ? {SharedPreferenceAppGroup.setAppGroup('ahmedhamdy.com.example.amit')}
-        : null;
+    // Platform.isIOS
+    //     ? {SharedPreferenceAppGroup.setAppGroup('ahmedhamdy.com.example.amit')}
+    //     : null;
   }
 
   // @override
