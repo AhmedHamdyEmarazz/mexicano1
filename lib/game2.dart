@@ -250,11 +250,11 @@ class _Game2State extends State<Game2> {
                         textAlign: TextAlign.center,
                         title,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.aclonica(
+                        style: TextStyle(
                             letterSpacing: size.width * 0.28 / title.length,
                             fontSize: size.height * 0.3 / title.length,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
                             fontStyle: FontStyle.normal),
                   
             ):
@@ -285,11 +285,11 @@ class _Game2State extends State<Game2> {
                       textAlign: TextAlign.center,
                       title,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.aclonica(
+                      style: TextStyle(
                           letterSpacing: size.width * 0.28 / title.length,
                           fontSize: size.height * 0.3 / title.length,
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
                           fontStyle: FontStyle.normal),
                     ),
                   ),
@@ -466,8 +466,9 @@ class _Game2State extends State<Game2> {
           ),
 
           Stack(children: [
-            Expanded(
-              child: GestureDetector(
+         //   Expanded(
+         //     child:
+               GestureDetector(
                 onTap: () async {
                   print(first);
                   // !first
@@ -512,8 +513,9 @@ class _Game2State extends State<Game2> {
                           : Colors.white.withOpacity(0.1),
                     ),
                     child: AnimatedOpacity(
-                      opacity: !opa || !move ? 0.0 : 1,
-                      duration: const Duration(seconds: 1),
+                      opacity: //!opa || !move  ? 0.0 : 1,
+                       opa &&move? 1:0.0,
+                      duration: const Duration(milliseconds: 100),
                       child: Center(
                           child: Text(
                         slap ? 'You Win' : 'Game Over',
@@ -525,7 +527,7 @@ class _Game2State extends State<Game2> {
                       )),
                     )),
               ),
-            ),
+        //    ),
             Stack(
               alignment: Alignment.center,
               children: [

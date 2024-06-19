@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Game extends StatefulWidget {
+    static const routeName = '/game';
+
   const Game({super.key});
 
   @override
@@ -116,7 +118,9 @@ class _GameState extends State<Game> {
 
     title = 'Mexicano\'s Save';
 
-    return Scaffold(
+    return
+    
+     Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           const SizedBox(
@@ -272,11 +276,11 @@ class _GameState extends State<Game> {
                         textAlign: TextAlign.center,
                         title,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.aclonica(
+                        style: TextStyle(
                             letterSpacing: size.width * 0.28 / title.length,
                             fontSize: size.height * 0.3 / title.length,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
                             fontStyle: FontStyle.normal),
                   
             ):
@@ -307,11 +311,11 @@ class _GameState extends State<Game> {
                     textAlign: TextAlign.center,
                     title,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.aclonica(
+                    style: TextStyle(
                         letterSpacing: size.width * 0.28 / title.length,
                         fontSize: size.height * 0.3 / title.length,
                         color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
                         fontStyle: FontStyle.normal),
                   ),
                 ),
@@ -486,7 +490,7 @@ class _GameState extends State<Game> {
                       })
                     : null;
               },
-              child: Expanded(
+           //   child: Expanded(
                 child: Container(
                     width: size.width,
                     height: size.height * 0.5,
@@ -497,8 +501,10 @@ class _GameState extends State<Game> {
                           : Colors.white.withOpacity(0.1),
                     ),
                     child: AnimatedOpacity(
-                      opacity: !opa || !move ? 0.0 : 1,
-                      duration: const Duration(seconds: 1),
+                      opacity:// !opa || !move  ? 0.0 : 1,
+                       opa &&move? 1:0.0,
+                 //  opa ? 1:0.0,
+                      duration: const Duration(milliseconds: 100),
                       child: Center(
                           child: Text(
                         jump ? 'You Win' : 'Game Over',
@@ -506,11 +512,11 @@ class _GameState extends State<Game> {
                             fontSize: size.width * 0.15,
                             fontStyle: FontStyle.italic,
                             color:
-                                Colors.redAccent.withOpacity(!opaa ? 0.0 : 1)),
+                                Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
                       )),
                     )),
               ),
-            ),
+          //  ),
             Stack(
               alignment: Alignment.topCenter, //TODO:
               children: [
@@ -689,6 +695,7 @@ class _GameState extends State<Game> {
               onEnd: () {
                 setState(() {
                   opa = true;
+                
                 });
                 // Future.delayed(const Duration(seconds: 3), () {
                 //   setState(() {
@@ -716,7 +723,7 @@ class _GameState extends State<Game> {
                       //   move = !move;
                       //   opa = false;
 
-                      //   print('hello');
+                        print(opa);
                       // });
                       // Future.delayed(const Duration(seconds: 3), () {
                       //   setState(() {

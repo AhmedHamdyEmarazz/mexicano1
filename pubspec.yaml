@@ -1,7 +1,7 @@
 name: amit
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.1+3
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
@@ -43,3 +43,7 @@ flutter:
       - assets/mexicano.jpeg
       - assets/balahaz.mp3    
 
+  fonts:
+     - family: Aclonica
+       fonts:
+         - asset: assets/fonts/Aclonica-Regular.ttf
