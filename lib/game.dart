@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Game extends StatefulWidget {
-    static const routeName = '/game';
+  static const routeName = '/game';
 
   const Game({super.key});
 
@@ -54,20 +54,20 @@ class _GameState extends State<Game> {
   bool pause3 = false;
   bool first = false;
   bool first2 = false;
-  void music1(bool pausee) async {
-    if (pausee) {
-      player.open(
-        Audio("assets/balaha1.mp3"),
-      );
-      player.playOrPause();
-    } else
-//  await player.play(UrlSource(
-//             'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
-    {
-      player.pause();
-    }
-//player.pause();
-  }
+//   void music1(bool pausee) async {
+//     if (pausee) {
+//       player.open(
+//         Audio("assets/balaha1.mp3"),
+//       );
+//       player.playOrPause();
+//     } else
+// //  await player.play(UrlSource(
+// //             'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
+//     {
+//       player.pause();
+//     }
+// //player.pause();
+//   }
 
   @override
   void initState() {
@@ -118,9 +118,7 @@ class _GameState extends State<Game> {
 
     title = 'Mexicano\'s Save';
 
-    return
-    
-     Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           const SizedBox(
@@ -270,58 +268,58 @@ class _GameState extends State<Game> {
         //   leadingWidth: double.infinity,
         bottom: PreferredSize(
           preferredSize: size * 0.08,
-          child: 
-            Platform.isIOS ? 
-            Text(
-                        textAlign: TextAlign.center,
-                        title,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: size.width * 0.28 / title.length,
-                            fontSize: size.height * 0.3 / title.length,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
-                            fontStyle: FontStyle.normal),
-                  
-            ):
-          
-          Container(
-            alignment: Alignment.centerLeft,
-            decoration:
-                BoxDecoration(color: Colors.indigo.shade400, boxShadow: const [
-              BoxShadow(
-                  color: Color.fromARGB(27, 0, 0, 0),
-                  spreadRadius: 0.8,
-                  offset: Offset(0, 4))
-            ]),
-            width: double.infinity,
-            height: size.height * 0.12,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: //20
-                      size.width * 0.06,
-                ),
-                Container(
-                  width: //20
-                      size.width * 0.9,
+          child: Platform.isIOS
+              ? Text(
+                  textAlign: TextAlign.center,
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: size.width * 0.28 / title.length,
+                      fontSize: size.height * 0.3 / title.length,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Aclonica',
+                      fontStyle: FontStyle.normal),
+                )
+              : Container(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        letterSpacing: size.width * 0.28 / title.length,
-                        fontSize: size.height * 0.3 / title.length,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
-                        fontStyle: FontStyle.normal),
+                  decoration: BoxDecoration(
+                      color: Colors.indigo.shade400,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Color.fromARGB(27, 0, 0, 0),
+                            spreadRadius: 0.8,
+                            offset: Offset(0, 4))
+                      ]),
+                  width: double.infinity,
+                  height: size.height * 0.12,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: //20
+                            size.width * 0.06,
+                      ),
+                      Container(
+                        width: //20
+                            size.width * 0.9,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              letterSpacing: size.width * 0.28 / title.length,
+                              fontSize: size.height * 0.3 / title.length,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Aclonica',
+                              fontStyle: FontStyle.normal),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
         ),
       ),
       body: Column(
@@ -490,33 +488,32 @@ class _GameState extends State<Game> {
                       })
                     : null;
               },
-           //   child: Expanded(
-                child: Container(
-                    width: size.width,
-                    height: size.height * 0.5,
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      color: jump
-                          ? Colors.red.withOpacity(0.1)
-                          : Colors.white.withOpacity(0.1),
-                    ),
-                    child: AnimatedOpacity(
-                      opacity:// !opa || !move  ? 0.0 : 1,
-                       opa &&move? 1:0.0,
-                 //  opa ? 1:0.0,
-                      duration: const Duration(milliseconds: 100),
-                      child: Center(
-                          child: Text(
-                        jump ? 'You Win' : 'Game Over',
-                        style: TextStyle(
-                            fontSize: size.width * 0.15,
-                            fontStyle: FontStyle.italic,
-                            color:
-                                Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
-                      )),
+              //   child: Expanded(
+              child: Container(
+                  width: size.width,
+                  height: size.height * 0.5,
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                    color: jump
+                        ? Colors.red.withOpacity(0.1)
+                        : Colors.white.withOpacity(0.1),
+                  ),
+                  child: AnimatedOpacity(
+                    opacity: // !opa || !move  ? 0.0 : 1,
+                        opa && move ? 1 : 0.0,
+                    //  opa ? 1:0.0,
+                    duration: const Duration(milliseconds: 100),
+                    child: Center(
+                        child: Text(
+                      jump ? 'You Win' : 'Game Over',
+                      style: TextStyle(
+                          fontSize: size.width * 0.15,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
                     )),
-              ),
-          //  ),
+                  )),
+            ),
+            //  ),
             Stack(
               alignment: Alignment.topCenter, //TODO:
               children: [
@@ -526,7 +523,7 @@ class _GameState extends State<Game> {
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.3),
                     )),
-                     InkWell(
+                InkWell(
                   splashColor: ghost ? Colors.green : Colors.red,
                   hoverColor: ghost ? Colors.green : Colors.red,
                   highlightColor: ghost ? Colors.green : Colors.red,
@@ -547,43 +544,40 @@ class _GameState extends State<Game> {
                           const BorderRadius.all(Radius.circular(7.0)),
                     ),
                     alignment: Alignment.center,
-                    child:
-                     AnimatedTextKit(
-                  animatedTexts: [
-                    ScaleAnimatedText(
-                      !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
-                      textAlign: TextAlign.center,
-                      scalingFactor: 2,
-                      textStyle: GoogleFonts.aclonica(
-                          color: !ghost ? Colors.red : Colors.green,
-                          fontSize: 8,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.italic),
-                      duration: Duration(milliseconds: 1500),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        ScaleAnimatedText(
+                          !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+                          textAlign: TextAlign.center,
+                          scalingFactor: 2,
+                          textStyle: GoogleFonts.aclonica(
+                              color: !ghost ? Colors.red : Colors.green,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w200,
+                              fontStyle: FontStyle.italic),
+                          duration: Duration(milliseconds: 1500),
+                        ),
+                        ScaleAnimatedText(
+                          !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+                          textAlign: TextAlign.center,
+                          scalingFactor: 0.5,
+                          textStyle: GoogleFonts.aclonica(
+                              color: !ghost ? Colors.red : Colors.green,
+                              fontSize: size.height < 300 ? 8 : 13,
+                              fontWeight: FontWeight.w200,
+                              fontStyle: FontStyle.italic),
+                          duration: Duration(milliseconds: 1500),
+                        ),
+                      ],
+                      repeatForever: true,
+                      pause: Duration(milliseconds: 50),
+                      // isRepeatingAnimation: false,
+                      onNext: (p0, p1) {
+                        setState(() {});
+                      },
                     ),
-                    ScaleAnimatedText(
-                      !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
-                      textAlign: TextAlign.center,
-                      scalingFactor: 0.5,
-                      textStyle: GoogleFonts.aclonica(
-                          color: !ghost ? Colors.red : Colors.green,
-                          fontSize: size.height < 300 ? 8 : 13,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.italic),
-                      duration: Duration(milliseconds: 1500),
-                    ),
-                  ],
-                  repeatForever: true,
-                  pause: Duration(milliseconds: 50),
-                  // isRepeatingAnimation: false,
-                  onNext: (p0, p1) {
-                    setState(() {});
-                  },
-                ),
                   ),
                 ),
-               
-               
                 Positioned(
                   child: IconButton(
                       onPressed: () {
@@ -675,7 +669,9 @@ class _GameState extends State<Game> {
                           child: imgPath != 'null'
                               ? Image.file(
                                   File(opa && jump ? imgPath! : imgPath2!),
-                                  fit: BoxFit.contain,
+                                  fit: BoxFit.fill,
+                                  height: size.height * 0.1,
+
                                   // width: double.infinity,
                                 )
                               : Image.asset(
@@ -683,6 +679,8 @@ class _GameState extends State<Game> {
                                       ? 'assets/balaha.jpeg'
                                       : 'assets/balaha1.jpeg',
                                   fit: BoxFit.fill,
+                                  height: size.height * 0.1,
+
                                   //  width: size.width * 0.3,
                                   //  height: size.height * 0.4,
                                 ),
@@ -695,7 +693,6 @@ class _GameState extends State<Game> {
               onEnd: () {
                 setState(() {
                   opa = true;
-                
                 });
                 // Future.delayed(const Duration(seconds: 3), () {
                 //   setState(() {
@@ -723,7 +720,7 @@ class _GameState extends State<Game> {
                       //   move = !move;
                       //   opa = false;
 
-                        print(opa);
+                      print(opa);
                       // });
                       // Future.delayed(const Duration(seconds: 3), () {
                       //   setState(() {
@@ -736,7 +733,9 @@ class _GameState extends State<Game> {
                       child: Text(
                         !move ? '' : '💩',
                         style: TextStyle(
-                            fontSize: size.height * 0.05,
+                            fontSize: size.width * 0.04 > size.height * 0.05
+                                ? size.width * 0.04
+                                : size.height * 0.05,
                             color: opa ? Colors.red : Colors.brown),
                       ),
                     ),

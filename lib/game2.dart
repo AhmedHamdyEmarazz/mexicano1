@@ -25,20 +25,20 @@ class _Game2State extends State<Game2> {
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
-  void music1(bool pausee) async {
-    if (pausee) {
-      player.open(
-        Audio("assets/balaha1.mp3"),
-      );
-      player.playOrPause();
-    } else
-//  await player.play(UrlSource(
-//             'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
-    {
-      player.pause();
-    }
-//player.pause();
-  }
+//   void music1(bool pausee) async {
+//     if (pausee) {
+//       player.open(
+//         Audio("assets/balaha1.mp3"),
+//       );
+//       player.playOrPause();
+//     } else
+// //  await player.play(UrlSource(
+// //             'https://dld3.dldnw.click/dl?hash=i7jWsdZVyV0Lgt5%2BA%2BIjOsbhQsYziROfNIo7PWrfPWZDz748gNr%2Fe3nQ4uZZ2FFGe15%2F0blpnCzbaeOBWW7tdDTAxDOXmTF1mEKj6tC8g7j5iseARgXStXL%2BpRRKZEA1nd9otxmeDgYSyxMubYtmZ0PeZ94eGy%2BK1RaZygMarRvDeerYXDNn%2FCKzmF38sgprH56s%2Fa9t4w%2BCmsaQotMWEFRAWA%2FA5I2pgvFeoZE4HTnkJJEgpIIwcb3Ufls8DXBE'))
+//     {
+//       player.pause();
+//     }
+// //player.pause();
+//   }
 
   @override
   void initState() {
@@ -240,62 +240,62 @@ class _Game2State extends State<Game2> {
         ),
         backgroundColor: Colors.indigo.shade500,
         toolbarHeight: size.height * 0.14,
-         //  leadingWidth: 0,
+        //  leadingWidth: 0,
         bottom: PreferredSize(
           preferredSize: size * 0.08,
           child: SafeArea(
-            child:
-            Platform.isIOS ? 
-            Text(
-                        textAlign: TextAlign.center,
-                        title,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: size.width * 0.28 / title.length,
-                            fontSize: size.height * 0.3 / title.length,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
-                            fontStyle: FontStyle.normal),
-                  
-            ):
-            
-             Container(
-              alignment: Alignment.centerLeft,
-              decoration:
-                  BoxDecoration(color: Colors.indigo.shade400, boxShadow: const [
-                BoxShadow(
-                    color: Color.fromARGB(27, 0, 0, 0),
-                    spreadRadius: 0.8,
-                    offset: Offset(0, 4))
-              ]),
-              width:size.width, //double.infinity,
-              height: size.height * 0.12,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: //20
-                        size.width * 0.06,
-                  ),
-                  Container(
-                    width: //20
-                        size.width * 0.9,
+            child: Platform.isIOS
+                ? Text(
+                    textAlign: TextAlign.center,
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: size.width * 0.28 / title.length,
+                        fontSize: size.height * 0.3 / title.length,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Aclonica',
+                        fontStyle: FontStyle.normal),
+                  )
+                : Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      title,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          letterSpacing: size.width * 0.28 / title.length,
-                          fontSize: size.height * 0.3 / title.length,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,fontFamily: 'Aclonica',
-                          fontStyle: FontStyle.normal),
+                    decoration: BoxDecoration(
+                        color: Colors.indigo.shade400,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color.fromARGB(27, 0, 0, 0),
+                              spreadRadius: 0.8,
+                              offset: Offset(0, 4))
+                        ]),
+                    width: size.width, //double.infinity,
+                    height: size.height * 0.12,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: //20
+                              size.width * 0.06,
+                        ),
+                        Container(
+                          width: //20
+                              size.width * 0.9,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            title,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: size.width * 0.28 / title.length,
+                                fontSize: size.height * 0.3 / title.length,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Aclonica',
+                                fontStyle: FontStyle.normal),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
           ),
         ),
       ),
@@ -466,68 +466,67 @@ class _Game2State extends State<Game2> {
           ),
 
           Stack(children: [
-         //   Expanded(
-         //     child:
-               GestureDetector(
-                onTap: () async {
-                  print(first);
-                  // !first
-                  //     ? setState(() {
-                  //         first = true;
-                  //         pause1 = !pause1;
-                  //       })
-                  //     : setState(() {
-                  //         pause1 = !pause1;
-                  //       });
-                  if (first == true && !opa && move && !hold) {
-                    setState(() {
-                      pause1 = !pause1;
-                    });
-                    // player.open(
-                    //   Audio("assets/balahaz.mp3"),
-                    // );
-                    player.playOrPause();
-                  }
-                  if (first == false && !opa && move && !hold) {
-                    setState(() {
-                      first = true;
-                      pause1 = !pause1;
-                    });
-                    player.open(
-                      Audio("assets/balahaz.mp3"),
-                    );
-                  }
-                  !opa && move && !hold
-                      ? setState(() {
-                          slap = !slap;
-                          hold = true;
-                        })
-                      : null;
-                },
-                child: Container(
-                    width: size.width,
-                    height: size.height * 0.5,
-                    decoration: BoxDecoration(
-                      color: slap
-                          ? Colors.red.withOpacity(0.1)
-                          : Colors.white.withOpacity(0.1),
-                    ),
-                    child: AnimatedOpacity(
-                      opacity: //!opa || !move  ? 0.0 : 1,
-                       opa &&move? 1:0.0,
-                      duration: const Duration(milliseconds: 100),
-                      child: Center(
-                          child: Text(
-                        slap ? 'You Win' : 'Game Over',
-                        style: TextStyle(
-                            fontSize: size.width * 0.15,
-                            fontStyle: FontStyle.italic,
-                            color:
-                                Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
-                      )),
+            //   Expanded(
+            //     child:
+            GestureDetector(
+              onTap: () async {
+                print(first);
+                // !first
+                //     ? setState(() {
+                //         first = true;
+                //         pause1 = !pause1;
+                //       })
+                //     : setState(() {
+                //         pause1 = !pause1;
+                //       });
+                if (first == true && !opa && move && !hold) {
+                  setState(() {
+                    pause1 = !pause1;
+                  });
+                  // player.open(
+                  //   Audio("assets/balahaz.mp3"),
+                  // );
+                  player.playOrPause();
+                }
+                if (first == false && !opa && move && !hold) {
+                  setState(() {
+                    first = true;
+                    pause1 = !pause1;
+                  });
+                  player.open(
+                    Audio("assets/balahaz.mp3"),
+                  );
+                }
+                !opa && move && !hold
+                    ? setState(() {
+                        slap = !slap;
+                        hold = true;
+                      })
+                    : null;
+              },
+              child: Container(
+                  width: size.width,
+                  height: size.height * 0.5,
+                  decoration: BoxDecoration(
+                    color: slap
+                        ? Colors.red.withOpacity(0.1)
+                        : Colors.white.withOpacity(0.1),
+                  ),
+                  child: AnimatedOpacity(
+                    opacity: //!opa || !move  ? 0.0 : 1,
+                        opa && move ? 1 : 0.0,
+                    duration: const Duration(milliseconds: 100),
+                    child: Center(
+                        child: Text(
+                      slap ? 'You Win' : 'Game Over',
+                      style: TextStyle(
+                          fontSize: size.width * 0.15,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
                     )),
-              ),
-        //    ),
+                  )),
+            ),
+            //    ),
             Stack(
               alignment: Alignment.center,
               children: [
@@ -642,7 +641,9 @@ class _Game2State extends State<Game2> {
 /////////////////////////////////////////////////////////// this is the difficulty balah go and back speed
 
                 duration: Duration(milliseconds: next(50, 300)),
-                right: !slap ? size.width * 0.72 : size.width * 0.03,
+                right: !slap ? size.width * 0.8 : size.width * 0.0,
+                // right: !slap ? size.width * 0.72 : null, //size.width * 0.00,
+                left: slap ? size.width * 0.72 : size.width * 0.00,
                 //     top: !slap ? size.height * 0.47 : size.height * 0.3,
                 bottom: 0,
                 child: IconButton(
@@ -667,7 +668,9 @@ class _Game2State extends State<Game2> {
                   },
                   icon: Container(
                     width: size.width * 0.17,
-                    constraints: BoxConstraints(maxHeight: size.height * 0.24),
+                    constraints: BoxConstraints(
+                        maxHeight: size.height * 0.24,
+                        maxWidth: size.width * 0.14),
                     padding: const EdgeInsets.all(0),
                     //    margin: const EdgeInsets.only(left: 5, right: 5),
                     decoration: BoxDecoration(
@@ -691,14 +694,19 @@ class _Game2State extends State<Game2> {
                       child: imgPath != 'null'
                           ? Image.file(
                               File(opa && slap ? imgPath2! : imgPath!),
-                              fit: BoxFit.contain,
-                              // width: double.infinity,
+                              fit: BoxFit.fill,
+                              //   width: size.width * 0.,
+                              height: size.height * 0.1,
                             )
                           : Image.asset(
                               opa && slap
                                   ? 'assets/balaha1.jpeg'
                                   : 'assets/balaha.jpeg',
+                              //   fit: BoxFit.fitHeight,
                               fit: BoxFit.fill,
+
+                              height: size.height * 0.1,
+
                               //  width: size.width * 0.3,
                               //  height: size.height * 0.4,
                             ),
@@ -707,7 +715,7 @@ class _Game2State extends State<Game2> {
                 )),
             Positioned(
               left: 0,
-              bottom: size.height * 0.03,
+              bottom: 0, //size.height * 0.03,
               child: Text(
                 slap
                     ? '🤟'
@@ -715,8 +723,10 @@ class _Game2State extends State<Game2> {
                         ? '🚫\n${num.abs()}'
                         : '🖐',
                 style: TextStyle(
-                    fontSize:
-                        size.height * 0.07, //(size.height * 0.03 / size.width),
+                    fontSize: size.width * 0.07 > size.height * 0.05
+                        ? size.width * 0.07
+                        : size.height *
+                            0.05, //(size.height * 0.03 / size.width),
                     color: slap
                         ? Colors.yellow
                         : move && hold && !opa
@@ -769,7 +779,11 @@ class _Game2State extends State<Game2> {
                       child: Text(
                         !move ? '' : '💩',
                         style: TextStyle(
-                            fontSize: size.height * 0.05,
+                            fontSize: size.width * 0.04 > size.height * 0.05
+                                ? size.width * 0.04
+                                : size.height * 0.05,
+
+//size.height * 0.05,
                             color: opa ? Colors.red : Colors.brown),
                       ),
                     ),

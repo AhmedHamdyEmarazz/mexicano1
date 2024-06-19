@@ -10,9 +10,13 @@ PODS:
     - Flutter
   - native_device_orientation (0.0.1):
     - Flutter
+  - native_shared_preferences (1.0.0):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - shared_preference_app_group (1.0.0):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -32,7 +36,9 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
+  - native_shared_preferences (from `.symlinks/plugins/native_shared_preferences/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - shared_preference_app_group (from `.symlinks/plugins/shared_preference_app_group/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
@@ -51,8 +57,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   native_device_orientation:
     :path: ".symlinks/plugins/native_device_orientation/ios"
+  native_shared_preferences:
+    :path: ".symlinks/plugins/native_shared_preferences/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  shared_preference_app_group:
+    :path: ".symlinks/plugins/shared_preference_app_group/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
@@ -69,7 +79,9 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   native_device_orientation: 348b10c346a60ebbc62fb235a4fdb5d1b61a8f55
+  native_shared_preferences: 21a805f6149643c25a20a4f534692131faebadfe
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  shared_preference_app_group: 46aee3873e1da581d4904bece9876596d7f66725
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
@@ -77,4 +89,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.14.3
