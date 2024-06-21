@@ -32,9 +32,12 @@ class _GameState extends State<Game> {
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
+  bool? hard;
+
   int num = 2;
   var i;
-  String bird = 'v';
+  String bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+
   String title = '';
   void count() {
     for (i = 2; i > 0; i--) {
@@ -87,6 +90,34 @@ class _GameState extends State<Game> {
     await player2.stop();
   }
 
+  List<int> rand = [
+    200,
+    200,
+    250,
+    300,
+    400,
+    500,
+    700,
+    700,
+    500,
+    300,
+    400,
+    400,
+    1000,
+    1500,
+    2000,
+    2500,
+    300,
+    600,
+    600,
+    400,
+    700,
+    800,
+    800,
+    850,
+    900,
+    990,
+  ];
   int next(int min, int max) => min + random.nextInt(max - min);
   int next2(int min, int max) => min + random.nextInt(max - min);
 
@@ -98,6 +129,9 @@ class _GameState extends State<Game> {
               ? 'null'
               : prefs.getString("image2")
           : prefs.getString("image1");
+      hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
+          ? false
+          : true;
     });
   }
 
@@ -183,8 +217,11 @@ class _GameState extends State<Game> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  move = !move;
                   opa = false;
+                  move = !move;
+                  bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                  biggerr = true;
+//
                   opaa = false;
                   fly = true;
                   jump = false;
@@ -192,6 +229,7 @@ class _GameState extends State<Game> {
                   random = new Random();
                   //  surprise = false;
                   num = 2;
+
                   print('hello');
                 });
               },
@@ -213,8 +251,11 @@ class _GameState extends State<Game> {
                     : AnimatedTextKit(
                         onTap: () {
                           setState(() {
-                            move = !move;
                             opa = false;
+                            move = !move;
+                            bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                            biggerr = true;
+
                             opaa = false;
                             fly = true;
                             jump = false;
@@ -582,8 +623,11 @@ class _GameState extends State<Game> {
                   child: IconButton(
                       onPressed: () {
                         setState(() {
-                          move = !move;
                           opa = false;
+                          move = !move;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
+
                           opaa = false;
                           fly = true;
                           jump = false;
@@ -596,6 +640,27 @@ class _GameState extends State<Game> {
                       },
                       icon: Icon(move ? Icons.restart_alt : Icons.start)),
                   left: size.width * 0.85,
+                ),
+                Positioned(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          opa = false;
+                          move = !move;
+
+                          opaa = false;
+                          fly = true;
+                          jump = false;
+                          hold = false;
+                          num = 2;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
+                          random = new Random();
+                          print('hello');
+                        });
+                      },
+                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                  right: size.width * 0.85,
                 ),
               ],
             ),
@@ -668,16 +733,16 @@ class _GameState extends State<Game> {
                           borderRadius: BorderRadius.circular(9.0),
                           child: imgPath != 'null'
                               ? Image.file(
-                                  File(opa && jump ? imgPath! : imgPath2!),
+                                  File((opa && !jump) && move ? imgPath2! : imgPath!),
                                   fit: BoxFit.fill,
                                   height: size.height * 0.1,
 
                                   // width: double.infinity,
                                 )
                               : Image.asset(
-                                  opa && jump
-                                      ? 'assets/balaha.jpeg'
-                                      : 'assets/balaha1.jpeg',
+                                  (opa && !jump) && move
+                                      ? 'assets/balaha1.jpeg'
+                                      : 'assets/balaha.jpeg',
                                   fit: BoxFit.fill,
                                   height: size.height * 0.1,
 
@@ -709,7 +774,9 @@ class _GameState extends State<Game> {
                       ? Curves.decelerate
                       : accelerateEasing,
               duration: move
-                  ? Duration(milliseconds: next(500, 3000))
+                  ? Duration(
+                      milliseconds:
+                          hard! ? (rand..shuffle()).first : next(500, 3000))
                   : Duration(seconds: 0),
               child: AnimatedOpacity(
                   opacity: opa ? 0.4 : 1,
@@ -731,7 +798,11 @@ class _GameState extends State<Game> {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        !move ? '' : '💩',
+                        !move
+                            ? ''
+                            : Platform.isAndroid
+                                ? '💩'
+                                : '🩴',
                         style: TextStyle(
                             fontSize: size.width * 0.04 > size.height * 0.05
                                 ? size.width * 0.04

@@ -1,6 +1,7 @@
 import 'package:amit/custompic.dart';
 import 'package:amit/firsttheme.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppDrawerr extends StatefulWidget {
   @override
@@ -9,6 +10,32 @@ class AppDrawerr extends StatefulWidget {
 
 class _AppDrawerrState extends State<AppDrawerr> {
   @pragma('vm:entry-point')
+  bool? hard;
+
+  void get1() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
+          ? false
+          : true;
+    });
+    print(prefs.getBool("hard"));
+  }
+
+  void save1(bool val) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setBool("hard", hard!);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    get1();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -52,11 +79,11 @@ class _AppDrawerrState extends State<AppDrawerr> {
                               //      minLeadingWidth: 100,
                               title: Center(
                                   child: const Text(
-                                'custom pictures',
+                                'customize target',
                                 textAlign: TextAlign.center,
                                 //    overflow: TextOverflow.visible,
                                 style: const TextStyle(
-                                  fontFamily: 'Tajawal',
+                                  fontFamily: 'Aclonica',
                                 ),
                               )),
                               onTap: () async {
@@ -72,6 +99,7 @@ class _AppDrawerrState extends State<AppDrawerr> {
                   SizedBox(
                     height: 20,
                   ),
+//
                   Center(
                       child: Padding(
                           padding: EdgeInsets.fromLTRB(
@@ -88,7 +116,7 @@ class _AppDrawerrState extends State<AppDrawerr> {
                                 textAlign: TextAlign.center,
                                 //    overflow: TextOverflow.visible,
                                 style: const TextStyle(
-                                  fontFamily: 'Tajawal',
+                                  fontFamily: 'Aclonica',
                                 ),
                               )),
                               onTap: () async {
@@ -100,6 +128,35 @@ class _AppDrawerrState extends State<AppDrawerr> {
                                   }));
                                 }));
                               }))),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Container(
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Hard ?', textAlign: TextAlign.center,
+                          //    overflow: TextOverflow.visible,
+                          style: TextStyle(
+                              fontFamily: 'Aclonica',
+                              color: hard!
+                                  ? Colors.red
+                                  : Colors.red.withOpacity(0.3)),
+                        ),
+                        Switch(
+                          onChanged: (value) {
+                            save1(hard!);
+
+                            setState(() {
+                              hard = !hard!;
+                            });
+                          },
+                          value: hard!,
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             )));

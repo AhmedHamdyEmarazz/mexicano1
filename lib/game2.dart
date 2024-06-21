@@ -22,9 +22,12 @@ class _Game2State extends State<Game2> {
   bool pause3 = false;
   bool first = false;
   bool first2 = false;
+  bool mute = false;
+
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
+  bool? hard;
 //   void music1(bool pausee) async {
 //     if (pausee) {
 //       player.open(
@@ -48,6 +51,7 @@ class _Game2State extends State<Game2> {
     pause3;
     first;
     first2;
+    mute;
     get1();
     get2();
   }
@@ -71,7 +75,8 @@ class _Game2State extends State<Game2> {
   bool hold = false;
   int num = 2;
   var i;
-  String bird = 'v';
+  String bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+
   String title = '';
   void count() {
     for (i = 2; i > 0; i--) {
@@ -84,6 +89,31 @@ class _Game2State extends State<Game2> {
     }
   }
 
+  List<int> rand = [
+    300,
+    400,
+    500,
+    700,
+    700,
+    500,
+    300,
+    400,
+    400,
+    1000,
+    1500,
+    2000,
+    2500,
+    300,
+    600,
+    600,
+    400,
+    700,
+    800,
+    800,
+    850,
+    900,
+    990,
+  ];
   int next(int min, int max) => min + random.nextInt(max - min);
   void get1() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -93,6 +123,9 @@ class _Game2State extends State<Game2> {
               ? 'null'
               : prefs.getString("image2")
           : prefs.getString("image1");
+      hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
+          ? false
+          : true;
     });
   }
 
@@ -120,9 +153,16 @@ class _Game2State extends State<Game2> {
           const SizedBox(
             width: 20,
           ),
-          Text(
-            'balaha',
-            style: TextStyle(color: Colors.amber.withOpacity(0.0)),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                mute = !mute;
+              });
+            },
+            icon: Icon(
+              !mute ? Icons.music_note_rounded : Icons.music_off_rounded,
+              color: Colors.white,
+            ),
           )
         ],
         // actions: <Widget>[
@@ -162,13 +202,16 @@ class _Game2State extends State<Game2> {
             GestureDetector(
                 onTap: () {
                   setState(() {
-                    move = !move;
                     opa = false;
+
+                    move = !move;
                     opaa = false;
                     fly = true;
                     slap = false;
                     hold = false;
                     num = 2;
+                    bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                    biggerr = true;
                     random = new Random();
                     print('hello');
                   });
@@ -191,17 +234,21 @@ class _Game2State extends State<Game2> {
                       : AnimatedTextKit(
                           onTap: () {
                             setState(() {
-                              move = !move;
                               opa = false;
+
+                              move = !move;
                               opaa = false;
                               fly = true;
                               slap = false;
                               hold = false;
                               random = new Random();
                               num = 2;
+                              bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                              biggerr = true;
                               print('hello');
                             });
                           },
+//
                           animatedTexts: [
                             ScaleAnimatedText(
                               'START !',
@@ -479,23 +526,25 @@ class _Game2State extends State<Game2> {
                 //     : setState(() {
                 //         pause1 = !pause1;
                 //       });
-                if (first == true && !opa && move && !hold) {
-                  setState(() {
-                    pause1 = !pause1;
-                  });
-                  // player.open(
-                  //   Audio("assets/balahaz.mp3"),
-                  // );
-                  player.playOrPause();
-                }
-                if (first == false && !opa && move && !hold) {
-                  setState(() {
-                    first = true;
-                    pause1 = !pause1;
-                  });
-                  player.open(
-                    Audio("assets/balahaz.mp3"),
-                  );
+                if (!mute) {
+                  if (first == true && !opa && move && !hold) {
+                    setState(() {
+                      pause1 = !pause1;
+                    });
+                    // player.open(
+                    //   Audio("assets/balahaz.mp3"),
+                    // );
+                    player.playOrPause();
+                  }
+                  if (first == false && !opa && move && !hold) {
+                    setState(() {
+                      first = true;
+                      pause1 = !pause1;
+                    });
+                    player.open(
+                      Audio("assets/balahaz.mp3"),
+                    );
+                  }
                 }
                 !opa && move && !hold
                     ? setState(() {
@@ -595,19 +644,43 @@ class _Game2State extends State<Game2> {
                   child: IconButton(
                       onPressed: () {
                         setState(() {
-                          move = !move;
                           opa = false;
+                          move = !move;
+
                           opaa = false;
                           fly = true;
                           slap = false;
                           hold = false;
                           num = 2;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
                           random = new Random();
                           print('hello');
                         });
                       },
                       icon: Icon(move ? Icons.restart_alt : Icons.start)),
                   left: size.width * 0.85,
+                ),
+                Positioned(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          opa = false;
+                          move = !move;
+
+                          opaa = false;
+                          fly = true;
+                          slap = false;
+                          hold = false;
+                          num = 2;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
+                          random = new Random();
+                          print('hello');
+                        });
+                      },
+                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                  right: size.width * 0.85,
                 ),
               ],
             ),
@@ -755,7 +828,11 @@ class _Game2State extends State<Game2> {
                       ? Curves.decelerate
                       : accelerateEasing,
               duration: move
-                  ? Duration(milliseconds: next(1100, 4000))
+                  ? Duration(
+                      milliseconds:
+                          hard! ? (rand..shuffle()).first : next(500, 3000))
+
+                  //     (rand..shuffle()).first) //   next(1100, 4000))
                   : const Duration(seconds: 0),
               child: AnimatedOpacity(
                   opacity: opa ? 0.4 : 1,
@@ -777,7 +854,11 @@ class _Game2State extends State<Game2> {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        !move ? '' : '💩',
+                        !move
+                            ? ''
+                            : Platform.isAndroid
+                                ? '💩'
+                                : '🩴',
                         style: TextStyle(
                             fontSize: size.width * 0.04 > size.height * 0.05
                                 ? size.width * 0.04
@@ -825,23 +906,25 @@ class _Game2State extends State<Game2> {
           //     : setState(() {
           //         pause1 = !pause1;
           //       });
-          if (first == true && !opa && move && !hold) {
-            setState(() {
-              pause1 = !pause1;
-            });
-            // player.open(
-            //   Audio("assets/balahaz.mp3"),
-            // );
-            player.playOrPause();
-          }
-          if (first == false && !opa && move && !hold) {
-            setState(() {
-              first = true;
-              pause1 = !pause1;
-            });
-            player.open(
-              Audio("assets/balahaz.mp3"),
-            );
+          if (!mute) {
+            if (first == true && !opa && move && !hold) {
+              setState(() {
+                pause1 = !pause1;
+              });
+              // player.open(
+              //   Audio("assets/balahaz.mp3"),
+              // );
+              player.playOrPause();
+            }
+            if (first == false && !opa && move && !hold) {
+              setState(() {
+                first = true;
+                pause1 = !pause1;
+              });
+              player.open(
+                Audio("assets/balahaz.mp3"),
+              );
+            }
           }
           !opa && move && !hold
               ? setState(() {
