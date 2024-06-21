@@ -32,6 +32,8 @@ class _GameState extends State<Game> {
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
+  bool? hard;
+
   int num = 2;
   var i;
   String bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
@@ -88,6 +90,34 @@ class _GameState extends State<Game> {
     await player2.stop();
   }
 
+  List<int> rand = [
+    200,
+    200,
+    250,
+    300,
+    400,
+    500,
+    700,
+    700,
+    500,
+    300,
+    400,
+    400,
+    1000,
+    1500,
+    2000,
+    2500,
+    300,
+    600,
+    600,
+    400,
+    700,
+    800,
+    800,
+    850,
+    900,
+    990,
+  ];
   int next(int min, int max) => min + random.nextInt(max - min);
   int next2(int min, int max) => min + random.nextInt(max - min);
 
@@ -99,6 +129,9 @@ class _GameState extends State<Game> {
               ? 'null'
               : prefs.getString("image2")
           : prefs.getString("image1");
+      hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
+          ? false
+          : true;
     });
   }
 
@@ -608,6 +641,27 @@ class _GameState extends State<Game> {
                       icon: Icon(move ? Icons.restart_alt : Icons.start)),
                   left: size.width * 0.85,
                 ),
+                Positioned(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          opa = false;
+                          move = !move;
+
+                          opaa = false;
+                          fly = true;
+                          jump = false;
+                          hold = false;
+                          num = 2;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
+                          random = new Random();
+                          print('hello');
+                        });
+                      },
+                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                  right: size.width * 0.85,
+                ),
               ],
             ),
             AnimatedPositioned(
@@ -686,9 +740,9 @@ class _GameState extends State<Game> {
                                   // width: double.infinity,
                                 )
                               : Image.asset(
-                                  opa && jump
-                                      ? 'assets/balaha.jpeg'
-                                      : 'assets/balaha1.jpeg',
+                                  (opa && !jump) && move
+                                      ? 'assets/balaha1.jpeg'
+                                      : 'assets/balaha.jpeg',
                                   fit: BoxFit.fill,
                                   height: size.height * 0.1,
 
@@ -720,7 +774,9 @@ class _GameState extends State<Game> {
                       ? Curves.decelerate
                       : accelerateEasing,
               duration: move
-                  ? Duration(milliseconds: next(500, 3000))
+                  ? Duration(
+                      milliseconds:
+                          hard! ? (rand..shuffle()).first : next(500, 3000))
                   : Duration(seconds: 0),
               child: AnimatedOpacity(
                   opacity: opa ? 0.4 : 1,

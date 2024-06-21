@@ -27,6 +27,7 @@ class _Game2State extends State<Game2> {
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
+  bool? hard;
 //   void music1(bool pausee) async {
 //     if (pausee) {
 //       player.open(
@@ -88,6 +89,31 @@ class _Game2State extends State<Game2> {
     }
   }
 
+  List<int> rand = [
+    300,
+    400,
+    500,
+    700,
+    700,
+    500,
+    300,
+    400,
+    400,
+    1000,
+    1500,
+    2000,
+    2500,
+    300,
+    600,
+    600,
+    400,
+    700,
+    800,
+    800,
+    850,
+    900,
+    990,
+  ];
   int next(int min, int max) => min + random.nextInt(max - min);
   void get1() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -97,6 +123,9 @@ class _Game2State extends State<Game2> {
               ? 'null'
               : prefs.getString("image2")
           : prefs.getString("image1");
+      hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
+          ? false
+          : true;
     });
   }
 
@@ -799,7 +828,11 @@ class _Game2State extends State<Game2> {
                       ? Curves.decelerate
                       : accelerateEasing,
               duration: move
-                  ? Duration(milliseconds: next(1100, 4000))
+                  ? Duration(
+                      milliseconds:
+                          hard! ? (rand..shuffle()).first : next(500, 3000))
+
+                  //     (rand..shuffle()).first) //   next(1100, 4000))
                   : const Duration(seconds: 0),
               child: AnimatedOpacity(
                   opacity: opa ? 0.4 : 1,
