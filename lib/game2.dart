@@ -219,6 +219,7 @@ class _Game2State extends State<Game2> {
                               print('hello');
                             });
                           },
+//
                           animatedTexts: [
                             ScaleAnimatedText(
                               'START !',

@@ -188,7 +188,7 @@ class _GameState extends State<Game> {
                   move = !move;
                   bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
                   biggerr = true;
-
+//
                   opaa = false;
                   fly = true;
                   jump = false;

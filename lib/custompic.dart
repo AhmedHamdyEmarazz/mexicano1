@@ -231,6 +231,7 @@ class _CustomPicState extends State<CustomPic> {
                         Divider(thickness: 2),
                         Text('Image 1'),
                         ImageInput(_selectImage),
+//
                         Stack(
                           alignment: Alignment.center,
                           children: [

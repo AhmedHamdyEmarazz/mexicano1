@@ -18,7 +18,7 @@ void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // Wakelock.enable();
   // SharedPreferences sp = await SharedPreferences.getInstance();
-  // String? email = sp.getString('email');
+  // String? email = sp.getString('email');//
   // WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Navigation()));
 }

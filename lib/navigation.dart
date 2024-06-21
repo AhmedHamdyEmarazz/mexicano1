@@ -115,7 +115,7 @@ class _NavigationState extends State<Navigation> {
                 ),
           ),
         ),
-        body: _pages![_selectedPageIndex]['page'] as Widget,
+        body: _pages![_selectedPageIndex]['page'] as Widget, //
         bottomNavigationBar: BottomNavigationBar(
             //   backgroundColor: Color.fromARGB(255, 226, 219, 157),
             elevation: 0,
