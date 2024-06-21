@@ -52,11 +52,11 @@ class _AppDrawerrState extends State<AppDrawerr> {
                               //      minLeadingWidth: 100,
                               title: Center(
                                   child: const Text(
-                                'custom pictures',
+                                'customize target',
                                 textAlign: TextAlign.center,
                                 //    overflow: TextOverflow.visible,
                                 style: const TextStyle(
-                                  fontFamily: 'Tajawal',
+                                  fontFamily: 'Aclonica',
                                 ),
                               )),
                               onTap: () async {
@@ -88,7 +88,7 @@ class _AppDrawerrState extends State<AppDrawerr> {
                                 textAlign: TextAlign.center,
                                 //    overflow: TextOverflow.visible,
                                 style: const TextStyle(
-                                  fontFamily: 'Tajawal',
+                                  fontFamily: 'Aclonica',
                                 ),
                               )),
                               onTap: () async {

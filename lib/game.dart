@@ -34,7 +34,8 @@ class _GameState extends State<Game> {
   String? imgPath2;
   int num = 2;
   var i;
-  String bird = 'v';
+  String bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+
   String title = '';
   void count() {
     for (i = 2; i > 0; i--) {
@@ -183,8 +184,11 @@ class _GameState extends State<Game> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  move = !move;
                   opa = false;
+                  move = !move;
+                  bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                  biggerr = true;
+
                   opaa = false;
                   fly = true;
                   jump = false;
@@ -192,6 +196,7 @@ class _GameState extends State<Game> {
                   random = new Random();
                   //  surprise = false;
                   num = 2;
+
                   print('hello');
                 });
               },
@@ -213,8 +218,11 @@ class _GameState extends State<Game> {
                     : AnimatedTextKit(
                         onTap: () {
                           setState(() {
-                            move = !move;
                             opa = false;
+                            move = !move;
+                            bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                            biggerr = true;
+
                             opaa = false;
                             fly = true;
                             jump = false;
@@ -582,8 +590,11 @@ class _GameState extends State<Game> {
                   child: IconButton(
                       onPressed: () {
                         setState(() {
-                          move = !move;
                           opa = false;
+                          move = !move;
+                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                          biggerr = true;
+
                           opaa = false;
                           fly = true;
                           jump = false;
@@ -731,7 +742,11 @@ class _GameState extends State<Game> {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        !move ? '' : '💩',
+                        !move
+                            ? ''
+                            : Platform.isAndroid
+                                ? '💩'
+                                : '🩴',
                         style: TextStyle(
                             fontSize: size.width * 0.04 > size.height * 0.05
                                 ? size.width * 0.04

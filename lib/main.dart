@@ -1,4 +1,4 @@
-import 'package:amit/firsttheme.dart';
+import 'package:amit/navigation.dart';
 import 'package:flutter/material.dart';
 
 // void main() async {
@@ -20,7 +20,7 @@ void main() async {
   // SharedPreferences sp = await SharedPreferences.getInstance();
   // String? email = sp.getString('email');
   // WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: FirstTheme()));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Navigation()));
 }
 
 
