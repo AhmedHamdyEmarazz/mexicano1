@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:amit/drawer.dart';
 import 'package:amit/imageinput.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
 
-class CustomPic extends StatefulWidget {
-  const CustomPic({super.key});
+class CustomPic2 extends StatefulWidget {
+  const CustomPic2({super.key});
 
   @override
-  State<CustomPic> createState() => _CustomPicState();
+  State<CustomPic2> createState() => _CustomPic2State();
 }
 
-class _CustomPicState extends State<CustomPic> {
+class _CustomPic2State extends State<CustomPic2> {
   String title = '';
   bool tex = false;
   // late VideoPlayerController controller;
@@ -83,32 +84,32 @@ class _CustomPicState extends State<CustomPic> {
   void save1(String val) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      prefs.setString("image1", val);
+      prefs.setString("image3", val);
     });
   }
 
   void save2(String val) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      prefs.setString("image2", val);
+      prefs.setString("image4", val);
     });
   }
 
   void get1() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      imgPath = prefs.getString("image1") == null
+      imgPath = prefs.getString("image3") == null
           ? 'null'
-          : prefs.getString("image1");
+          : prefs.getString("image3");
     });
   }
 
   void get2() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      imgPath2 = prefs.getString("image2") == null
+      imgPath2 = prefs.getString("image4") == null
           ? 'null'
-          : prefs.getString("image2");
+          : prefs.getString("image4");
     });
   }
 
@@ -117,19 +118,19 @@ class _CustomPicState extends State<CustomPic> {
     List pics = [];
 
     setState(() {
-      prefs.getString("image1") != null
-          ? pics.add(prefs.getString("image1"))
+      prefs.getString("image3") != null
+          ? pics.add(prefs.getString("image3"))
           : null;
-      imgPath = prefs.getString("image1") == null
+      imgPath = prefs.getString("image3") == null
           ? 'null'
-          : prefs.getString("image1");
+          : prefs.getString("image3");
 
-      prefs.getString("image2") != null
-          ? pics.add(prefs.getString("image2"))
+      prefs.getString("image4") != null
+          ? pics.add(prefs.getString("image4"))
           : null;
-      imgPath2 = prefs.getString("image2") == null
+      imgPath2 = prefs.getString("image4") == null
           ? 'null'
-          : prefs.getString("image2");
+          : prefs.getString("image4");
     });
     //  print(pics);
     return pics;
@@ -143,72 +144,82 @@ class _CustomPicState extends State<CustomPic> {
     title = 'Mexicano\'s roulette';
 
     return Scaffold(
-//       drawer: AppDrawerr(),
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: Container(
-//           width: //20
-//               size.width * 0.9,
-//           alignment: Alignment.centerLeft,
-//           child: Text(
-//             textAlign: TextAlign.center,
-//             title,
-//             overflow: TextOverflow.ellipsis,
-//             style: GoogleFonts.aclonica(
-//                 letterSpacing: size.width * 0.28 / title.length,
-//                 fontSize: size.height * 0.3 / title.length,
-//                 color: Colors.white,
-//                 fontWeight: FontWeight.w600,
-//                 fontStyle: FontStyle.normal),
-//           ),
-//         ),
-//         backgroundColor: Colors.indigo.shade500,
-//         toolbarHeight: size.height * 0.1,
-//         //   leadingWidth: double.infinity,
-//         bottom: PreferredSize(
-//           preferredSize: size * 0.08,
-//           child: Container(
-//               alignment: Alignment.center,
-//               decoration: BoxDecoration(
-//                   color: Colors.indigo.shade400,
-//                   boxShadow: const [
-//                     BoxShadow(
-//                         color: Color.fromARGB(27, 0, 0, 0),
-//                         spreadRadius: 0.8,
-//                         offset: Offset(0, 4))
-//                   ]),
-//               width: double.infinity,
-//               height: size.height * 0.12,
-//               child: //controller.value.isInitialized
-//                   //  ?
-//                   Container(
-//                 width: size.width * 0.17,
-//                 constraints: BoxConstraints(maxHeight: size.height * 0.24),
-//                 padding: const EdgeInsets.all(0),
-//                 //    margin: const EdgeInsets.only(left: 5, right: 5),
-//                 decoration: BoxDecoration(
-//                   color: Colors.white.withOpacity(0.0),
-//                   // borderRadius:
-//                   //     const BorderRadius.all(Radius.circular(7.0)),
-//                 ),
-//                 // child: GestureDetector(
-//                 //   onTap: () {
-//                 //     controller.play();
-//                 //   },
-//                 child: ClipOval(
-//                     child: Image.asset(
-//                   'assets/balahax.jpeg',
-//                   fit: BoxFit.contain,
-//                 ) //VideoPlayer(controller)
-
-//                     //  ),
-//                     ),
-//               )
-//               //  :
-// // Text('🫘')
-//               ),
-//         ),
-//       ),
+      drawer: AppDrawerr(),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Container(
+            width: //20
+                size.width * 0.9,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              textAlign: TextAlign.center,
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  letterSpacing: size.width * 0.28 / title.length,
+                  fontSize: size.height * 0.3 / title.length,
+                  color: Colors.white,
+                  fontFamily: 'Aclonica',
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.normal),
+            ),
+          ),
+          backgroundColor: Colors.indigo.shade500,
+          toolbarHeight: size.height * 0.1,
+          //   leadingWidth: double.infinity,
+          bottom: PreferredSize(
+            preferredSize: size * 0.08,
+            child: ListTile(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.arrow_back_ios),
+              ),
+              title: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.indigo.shade400,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Color.fromARGB(27, 0, 0, 0),
+                            spreadRadius: 0.8,
+                            offset: Offset(0, 4))
+                      ]),
+                  width: double.infinity,
+                  height: size.height * 0.12,
+                  child: // controller.value.isInitialized
+                      //     ?
+                      Container(
+                    width: size.width * 0.17,
+                    constraints: BoxConstraints(maxHeight: size.height * 0.24),
+                    padding: const EdgeInsets.all(0),
+                    //    margin: const EdgeInsets.only(left: 5, right: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.0),
+                      // borderRadius:
+                      //     const BorderRadius.all(Radius.circular(7.0)),
+                    ),
+                    // child: GestureDetector(
+                    //   onTap: () {
+                    //     controller.play();
+                    //   },
+                    child: ClipOval(
+                        child: Image.asset(
+                      'assets/balahax.jpeg',
+                      fit: BoxFit.contain,
+                    ) // VideoPlayer(controller)
+                        //  color: Color.fromARGB(255, 226, 219, 157),
+                        //  ),
+                        ),
+                  )
+                  // ClipRRect(
+                  //                           borderRadius: BorderRadius.circular(20.0),
+                  //                           child: VideoPlayer(controller)))
+                  //    : Text('🫘')
+                  ),
+            ),
+          )),
       body:
 //  SingleChildScrollView(
 //         child:
@@ -229,7 +240,7 @@ class _CustomPicState extends State<CustomPic> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Divider(thickness: 2),
-                        Text('Image 1 (non collision image)'),
+                        Text('Image 1 (falling object)'),
                         ImageInput(_selectImage),
 //
                         Stack(
@@ -316,7 +327,7 @@ class _CustomPicState extends State<CustomPic> {
                           ],
                         ),
                         Divider(thickness: 2),
-                        Text('Image 2 (collision image)'),
+                        Text('Image 2 (spark object)'),
                         ImageInput(_selectImage2),
                         Stack(
                           alignment: Alignment.center,
@@ -506,9 +517,9 @@ class _CustomPicState extends State<CustomPic> {
                                                                         .toString() ==
                                                                     imgPath
                                                                 ? storage.remove(
-                                                                    'image1')
+                                                                    'image3')
                                                                 : storage.remove(
-                                                                    'image2');
+                                                                    'image4');
                                                             Navigator.of(ctx)
                                                                 .pop(true);
                                                           },

@@ -32,6 +32,8 @@ class _GameState extends State<Game> {
   Random random = new Random();
   String? imgPath;
   String? imgPath2;
+  String? imgPath3;
+
   bool? hard;
 
   int num = 2;
@@ -82,6 +84,7 @@ class _GameState extends State<Game> {
     first2;
     get1();
     get2();
+    get3();
   }
 
   @override
@@ -146,6 +149,15 @@ class _GameState extends State<Game> {
     });
   }
 
+  void get3() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath3 = prefs.getString("image3") == null
+          ? 'null'
+          : prefs.getString("image3");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -203,107 +215,276 @@ class _GameState extends State<Game> {
         //   )
         // ],
         centerTitle: true,
+//         title: Row(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             // ElevatedButton(
+//             //     onPressed: () {
+//             //       setState(() {
+//             //         move = false;
+//             //         opa = false;
+//             //       });
+//             //     },
+//             //     child: Text('reassemble')),
+//             GestureDetector(
+//               onTap: () {
+//                 setState(() {
+//                   opa = false;
+//                   move = !move;
+//                   bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+//                   biggerr = true;
+// //
+//                   opaa = false;
+//                   fly = true;
+//                   jump = false;
+//                   hold = false;
+//                   random = new Random();
+//                   //  surprise = false;
+//                   num = 2;
+
+//                   print('hello');
+//                 });
+//               },
+//               child: Container(
+//                 padding: const EdgeInsets.all(2),
+//                 decoration: BoxDecoration(
+//                   // color: Colors.white.withOpacity(0.0),
+//                   border: Border.all(color: Colors.blueGrey),
+//                   borderRadius: const BorderRadius.all(Radius.circular(7.0)),
+//                 ),
+//                 child: move
+//                     ? Text(
+//                         'restart?',
+//                         style: TextStyle(
+//                           fontSize: size.height < 300 ? 10 : 16,
+//                           color: Colors.white,
+//                         ),
+//                       )
+//                     : AnimatedTextKit(
+//                         onTap: () {
+//                           setState(() {
+//                             opa = false;
+//                             move = !move;
+//                             bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+//                             biggerr = true;
+
+//                             opaa = false;
+//                             fly = true;
+//                             jump = false;
+//                             hold = false;
+//                             random = new Random();
+//                             //  surprise = false;
+
+//                             num = 2;
+//                             print('hello');
+//                           });
+//                         },
+//                         animatedTexts: [
+//                           ScaleAnimatedText(
+//                             'START !',
+//                             textAlign: TextAlign.center,
+//                             scalingFactor: 2,
+//                             textStyle: GoogleFonts.aclonica(
+//                                 color: Colors.white,
+//                                 fontSize: 8,
+//                                 fontWeight: FontWeight.w200,
+//                                 fontStyle: FontStyle.italic),
+//                             duration: Duration(milliseconds: 1500),
+//                           ),
+//                           ScaleAnimatedText(
+//                             'START !',
+//                             textAlign: TextAlign.center,
+//                             scalingFactor: 0.5,
+//                             textStyle: GoogleFonts.aclonica(
+//                                 color: Colors.white,
+//                                 fontSize: size.height < 300 ? 10 : 16,
+//                                 fontWeight: FontWeight.w200,
+//                                 fontStyle: FontStyle.italic),
+//                             duration: Duration(milliseconds: 1500),
+//                           ),
+//                         ],
+//                         repeatForever: true,
+//                         pause: Duration(milliseconds: 50),
+//                         // isRepeatingAnimation: false,
+//                         onNext: (p0, p1) {
+//                           setState(() {
+//                             //  tex = !tex;
+//                           });
+//                         },
+//                       ),
+//               ),
+//             ),
+//           ],
+//         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ElevatedButton(
-            //     onPressed: () {
-            //       setState(() {
-            //         move = false;
-            //         opa = false;
-            //       });
-            //     },
-            //     child: Text('reassemble')),
-            GestureDetector(
-              onTap: () {
+            Text(
+              ghost ? 'Ghost mode' : 'Ghost mode ?',
+              textAlign: TextAlign.center,
+              //    overflow: TextOverflow.visible,
+              style: TextStyle(
+                  fontFamily: 'Aclonica',
+                  color: ghost ? Colors.red : Colors.white.withOpacity(0.3)),
+            ),
+            Switch(
+              activeTrackColor: Colors.red,
+              onChanged: (value) {
                 setState(() {
-                  opa = false;
-                  move = !move;
-                  bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
-                  biggerr = true;
-//
-                  opaa = false;
-                  fly = true;
-                  jump = false;
-                  hold = false;
-                  random = new Random();
-                  //  surprise = false;
-                  num = 2;
-
-                  print('hello');
+                  ghost = !ghost;
                 });
               },
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  // color: Colors.white.withOpacity(0.0),
-                  border: Border.all(color: Colors.blueGrey),
-                  borderRadius: const BorderRadius.all(Radius.circular(7.0)),
-                ),
-                child: move
-                    ? Text(
-                        'restart?',
-                        style: TextStyle(
-                          fontSize: size.height < 300 ? 10 : 16,
-                          color: Colors.white,
-                        ),
-                      )
-                    : AnimatedTextKit(
-                        onTap: () {
-                          setState(() {
-                            opa = false;
-                            move = !move;
-                            bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
-                            biggerr = true;
-
-                            opaa = false;
-                            fly = true;
-                            jump = false;
-                            hold = false;
-                            random = new Random();
-                            //  surprise = false;
-
-                            num = 2;
-                            print('hello');
-                          });
-                        },
-                        animatedTexts: [
-                          ScaleAnimatedText(
-                            'START !',
-                            textAlign: TextAlign.center,
-                            scalingFactor: 2,
-                            textStyle: GoogleFonts.aclonica(
-                                color: Colors.white,
-                                fontSize: 8,
-                                fontWeight: FontWeight.w200,
-                                fontStyle: FontStyle.italic),
-                            duration: Duration(milliseconds: 1500),
-                          ),
-                          ScaleAnimatedText(
-                            'START !',
-                            textAlign: TextAlign.center,
-                            scalingFactor: 0.5,
-                            textStyle: GoogleFonts.aclonica(
-                                color: Colors.white,
-                                fontSize: size.height < 300 ? 10 : 16,
-                                fontWeight: FontWeight.w200,
-                                fontStyle: FontStyle.italic),
-                            duration: Duration(milliseconds: 1500),
-                          ),
-                        ],
-                        repeatForever: true,
-                        pause: Duration(milliseconds: 50),
-                        // isRepeatingAnimation: false,
-                        onNext: (p0, p1) {
-                          setState(() {
-                            //  tex = !tex;
-                          });
-                        },
-                      ),
-              ),
+              value: ghost,
             ),
           ],
         ),
+
+        // Stack(
+        //   alignment: Alignment.center,
+        //   children: [
+        //     AnimatedTextKit(
+        //       animatedTexts: [
+        //         ScaleAnimatedText(
+        //           !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+        //           textAlign: TextAlign.center,
+        //           scalingFactor: 2,
+        //           textStyle: GoogleFonts.aclonica(
+        //               color: !ghost ? Colors.red : Colors.green,
+        //               fontSize: 8,
+        //               fontWeight: FontWeight.w200,
+        //               fontStyle: FontStyle.italic),
+        //           duration: Duration(milliseconds: 1500),
+        //         ),
+        //         ScaleAnimatedText(
+        //           !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+        //           textAlign: TextAlign.center,
+        //           scalingFactor: 0.5,
+        //           textStyle: GoogleFonts.aclonica(
+        //               color: !ghost ? Colors.red : Colors.green,
+        //               fontSize: size.height < 300 ? 8 : 13,
+        //               fontWeight: FontWeight.w200,
+        //               fontStyle: FontStyle.italic),
+        //           duration: Duration(milliseconds: 1500),
+        //         ),
+        //       ],
+        //       repeatForever: true,
+        //       pause: Duration(milliseconds: 50),
+        //       // isRepeatingAnimation: false,
+        //       onNext: (p0, p1) {
+        //         setState(() {});
+        //       },
+        //     ),
+        //     InkWell(
+        //       splashColor: ghost ? Colors.green : Colors.red,
+        //       hoverColor: ghost ? Colors.green : Colors.red,
+        //       highlightColor: ghost ? Colors.green : Colors.red,
+        //       focusColor: ghost ? Colors.green : Colors.red,
+        //       onTap: () {
+        //         setState(() {
+        //           ghost = !ghost;
+        //         });
+        //       },
+        //       child: Container(
+        //         width: size.width * 0.4,
+        //         height: size.height * 0.08,
+        //         padding: const EdgeInsets.all(2),
+        //         decoration: BoxDecoration(
+        //           // color: Colors.white.withOpacity(0.0),
+        //           border: Border.all(color: Colors.blueGrey),
+        //           borderRadius:
+        //               const BorderRadius.all(Radius.circular(7.0)),
+        //         ),
+        //         alignment: Alignment.center,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+
+//             GestureDetector(
+//                 onTap: () {
+//                   setState(() {
+//                     opa = false;
+
+//                     move = !move;
+//                     opaa = false;
+//                     fly = true;
+//                     slap = false;
+//                     hold = false;
+//                     num = 2;
+//                     bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+//                     biggerr = true;
+//                     random = new Random();
+//                     print('hello');
+//                   });
+//                 },
+//                 child: Container(
+//                   padding: const EdgeInsets.all(2),
+//                   decoration: BoxDecoration(
+//                     // color: Colors.white.withOpacity(0.0),
+//                     border: Border.all(color: Colors.blueGrey),
+//                     borderRadius: const BorderRadius.all(Radius.circular(7.0)),
+//                   ),
+//                   child: move
+//                       ? Text(
+//                           'restart?',
+//                           style: TextStyle(
+//                             fontSize: size.height < 300 ? 10 : 16,
+//                             color: Colors.white,
+//                           ),
+//                         )
+//                       : AnimatedTextKit(
+//                           onTap: () {
+//                             setState(() {
+//                               opa = false;
+
+//                               move = !move;
+//                               opaa = false;
+//                               fly = true;
+//                               slap = false;
+//                               hold = false;
+//                               random = new Random();
+//                               num = 2;
+//                               bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+//                               biggerr = true;
+//                               print('hello');
+//                             });
+//                           },
+// //
+//                           animatedTexts: [
+//                             ScaleAnimatedText(
+//                               'START !',
+//                               textAlign: TextAlign.center,
+//                               scalingFactor: 2,
+//                               textStyle: GoogleFonts.aclonica(
+//                                   color: Colors.white,
+//                                   fontSize: 8,
+//                                   fontWeight: FontWeight.w200,
+//                                   fontStyle: FontStyle.italic),
+//                               duration: Duration(milliseconds: 1500),
+//                             ),
+//                             ScaleAnimatedText(
+//                               'START !',
+//                               textAlign: TextAlign.center,
+//                               scalingFactor: 0.5,
+//                               textStyle: GoogleFonts.aclonica(
+//                                   color: Colors.white,
+//                                   fontSize: size.height < 300 ? 10 : 16,
+//                                   fontWeight: FontWeight.w200,
+//                                   fontStyle: FontStyle.italic),
+//                               duration: Duration(milliseconds: 1500),
+//                             ),
+//                           ],
+//                           repeatForever: true,
+//                           pause: Duration(milliseconds: 50),
+//                           // isRepeatingAnimation: false,
+//                           onNext: (p0, p1) {
+//                             setState(() {
+//                               //  tex = !tex;
+//                             });
+//                           },
+//                         ),
+//                 )),
+
         backgroundColor: Colors.indigo.shade500,
         toolbarHeight: size.height * 0.14,
         //   leadingWidth: double.infinity,
@@ -530,33 +711,121 @@ class _GameState extends State<Game> {
                     : null;
               },
               //   child: Expanded(
+              //   child: Container(
+              //       width: size.width,
+              //       height: size.height * 0.5,
+              //       alignment: Alignment.bottomCenter,
+              //       decoration: BoxDecoration(
+              //         color: jump
+              //             ? Colors.red.withOpacity(0.1)
+              //             : Colors.white.withOpacity(0.1),
+              //       ),
+              //       child: AnimatedOpacity(
+              //         opacity: // !opa || !move  ? 0.0 : 1,
+              //             opa && move ? 1 : 0.0,
+              //         //  opa ? 1:0.0,
+              //         duration: const Duration(milliseconds: 100),
+              //         child: Center(
+              //             child: Text(
+              //           jump ? 'You Win' : 'Game Over',
+              //           style: TextStyle(
+              //               fontSize: size.width * 0.15,
+              //               fontStyle: FontStyle.italic,
+              //               color: Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
+              //         )),
+              //       )),
+              // ),
               child: Container(
                   width: size.width,
                   height: size.height * 0.5,
-                  alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
                     color: jump
                         ? Colors.red.withOpacity(0.1)
                         : Colors.white.withOpacity(0.1),
                   ),
                   child: AnimatedOpacity(
-                    opacity: // !opa || !move  ? 0.0 : 1,
-                        opa && move ? 1 : 0.0,
-                    //  opa ? 1:0.0,
+                    opacity: //!opa || !move  ? 0.0 : 1,
+                        //        opa && move ? 1 : 0.0,
+                        0.7,
                     duration: const Duration(milliseconds: 100),
-                    child: Center(
-                        child: Text(
-                      jump ? 'You Win' : 'Game Over',
-                      style: TextStyle(
-                          fontSize: size.width * 0.15,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.redAccent.withOpacity(!opa ? 0.0 : 1)),
-                    )),
+                    child: Stack(
+                      children: [
+                        Center(
+                            child: Text('Tap on white !',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: size.width * 0.11,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: 'Aclonica',
+
+                                  color: Colors.greenAccent.withOpacity(
+                                      !opa && move
+                                          ? 1
+                                          : 0.0), // !opa && move ? 1 : 0.0,
+                                ))),
+                        Center(
+                          child: AnimatedTextKit(
+                            onTap: () async {
+                              !opa && move && !hold
+                                  ? setState(() {
+                                      jump = !jump;
+                                      hold = true;
+                                    })
+                                  : null;
+                            },
+
+                            animatedTexts: [
+                              ScaleAnimatedText(
+                                'Tap on white !',
+                                textAlign: TextAlign.center,
+                                scalingFactor: 2,
+                                textStyle: GoogleFonts.aclonica(
+                                    color: Colors.greenAccent.withOpacity(
+                                        !opa && move
+                                            ? 1
+                                            : 0.0), // !opa && move ? 1 : 0.0,
+                                    fontSize: size.width * 0.15,
+                                    fontWeight: FontWeight.w200,
+                                    fontStyle: FontStyle.italic),
+                                duration: Duration(milliseconds: 1500),
+                              ),
+                              ScaleAnimatedText(
+                                'Tap on white !',
+                                textAlign: TextAlign.center,
+                                scalingFactor: 0.5,
+                                textStyle: GoogleFonts.aclonica(
+                                    color: Colors.greenAccent.withOpacity(
+                                        !opa && move
+                                            ? 1
+                                            : 0.0), // !opa && move ? 1 : 0.0,
+                                    fontSize: size.width * 0.11,
+                                    fontWeight: FontWeight.w200,
+                                    fontStyle: FontStyle.italic),
+                                duration: Duration(milliseconds: 1500),
+                              ),
+                            ],
+                            repeatForever: true,
+                            pause: Duration(milliseconds: 50),
+                            // isRepeatingAnimation: false,
+                            onNext: (p0, p1) {},
+                          ),
+                        ),
+                        Center(
+                            child: Text(
+                          jump ? 'You Win' : 'Game Over',
+                          style: TextStyle(
+                              fontSize: size.width * 0.11,
+                              fontStyle: FontStyle.italic,
+                              fontFamily: 'Aclonica',
+                              color: Colors.redAccent
+                                  .withOpacity(opa && move ? 1 : 0.0)),
+                        )),
+                      ],
+                    ),
                   )),
             ),
-            //  ),
             Stack(
-              alignment: Alignment.topCenter, //TODO:
+              alignment: Alignment.center,
               children: [
                 Container(
                     width: size.width,
@@ -564,90 +833,33 @@ class _GameState extends State<Game> {
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.3),
                     )),
-                InkWell(
-                  splashColor: ghost ? Colors.green : Colors.red,
-                  hoverColor: ghost ? Colors.green : Colors.red,
-                  highlightColor: ghost ? Colors.green : Colors.red,
-                  focusColor: ghost ? Colors.green : Colors.red,
-                  onTap: () {
-                    setState(() {
-                      ghost = !ghost;
-                    });
-                  },
-                  child: Container(
-                    width: size.width * 0.4,
-                    height: size.height * 0.08,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      // color: Colors.white.withOpacity(0.0),
-                      border: Border.all(color: Colors.blueGrey),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(7.0)),
-                    ),
-                    alignment: Alignment.center,
-                    child: AnimatedTextKit(
-                      animatedTexts: [
-                        ScaleAnimatedText(
-                          !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
-                          textAlign: TextAlign.center,
-                          scalingFactor: 2,
-                          textStyle: GoogleFonts.aclonica(
-                              color: !ghost ? Colors.red : Colors.green,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w200,
-                              fontStyle: FontStyle.italic),
-                          duration: Duration(milliseconds: 1500),
-                        ),
-                        ScaleAnimatedText(
-                          !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
-                          textAlign: TextAlign.center,
-                          scalingFactor: 0.5,
-                          textStyle: GoogleFonts.aclonica(
-                              color: !ghost ? Colors.red : Colors.green,
-                              fontSize: size.height < 300 ? 8 : 13,
-                              fontWeight: FontWeight.w200,
-                              fontStyle: FontStyle.italic),
-                          duration: Duration(milliseconds: 1500),
-                        ),
-                      ],
-                      repeatForever: true,
-                      pause: Duration(milliseconds: 50),
-                      // isRepeatingAnimation: false,
-                      onNext: (p0, p1) {
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ),
-                Positioned(
-                  child: IconButton(
-                      onPressed: () {
+                GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        opa = false;
+
+                        move = !move;
+                        opaa = false;
+                        fly = true;
+                        jump = false;
+                        hold = false;
+                        num = 2;
+                        bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                        biggerr = true;
+                        random = new Random();
+                        print('hello');
+                      });
+                    },
+                    child: InkWell(
+                      splashColor: !move ? Colors.green : Colors.red,
+                      hoverColor: !move ? Colors.green : Colors.red,
+                      highlightColor: !move ? Colors.green : Colors.red,
+                      focusColor: !move ? Colors.green : Colors.red,
+                      onTap: () {
                         setState(() {
                           opa = false;
-                          move = !move;
-                          bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
-                          biggerr = true;
 
-                          opaa = false;
-                          fly = true;
-                          jump = false;
-                          hold = false;
-                          random = new Random();
-                          //  surprise = false;
-                          num = 2;
-                          print('hello');
-                        });
-                      },
-                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
-                  left: size.width * 0.85,
-                ),
-                Positioned(
-                  child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          opa = false;
                           move = !move;
-
                           opaa = false;
                           fly = true;
                           jump = false;
@@ -659,9 +871,179 @@ class _GameState extends State<Game> {
                           print('hello');
                         });
                       },
-                      icon: Icon(move ? Icons.restart_alt : Icons.start)),
-                  right: size.width * 0.85,
-                ),
+                      child: Container(
+                        width: double.infinity,
+                        height: size.height * 0.1,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          // color: Colors.white.withOpacity(0.0),
+                          border: Border.all(color: Colors.blueGrey),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(7.0)),
+                        ),
+                        child: move
+                            ? Text(
+                                'restart?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: size.height < 300 ? 10 : 16,
+                                  fontFamily: 'Aclonica',
+                                  color: Colors.red,
+                                ),
+                              )
+                            : AnimatedTextKit(
+                                onTap: () {
+                                  setState(() {
+                                    opa = false;
+
+                                    move = !move;
+                                    opaa = false;
+                                    fly = true;
+                                    jump = false;
+                                    hold = false;
+                                    random = new Random();
+                                    num = 2;
+                                    bird = Platform.isAndroid
+                                        ? '🧛🏻‍♂️'
+                                        : '🧙‍♀️';
+                                    biggerr = true;
+                                    print('hello');
+                                  });
+                                },
+
+                                animatedTexts: [
+                                  ScaleAnimatedText(
+                                    'START !',
+                                    textAlign: TextAlign.center,
+                                    scalingFactor: 2,
+                                    textStyle: GoogleFonts.aclonica(
+                                        color: Colors.green,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w200,
+                                        fontStyle: FontStyle.italic),
+                                    duration: Duration(milliseconds: 1500),
+                                  ),
+                                  ScaleAnimatedText(
+                                    'START !',
+                                    textAlign: TextAlign.center,
+                                    scalingFactor: 0.5,
+                                    textStyle: GoogleFonts.aclonica(
+                                        color: Colors.green,
+                                        fontSize: size.height < 300 ? 10 : 16,
+                                        fontWeight: FontWeight.w200,
+                                        fontStyle: FontStyle.italic),
+                                    duration: Duration(milliseconds: 1500),
+                                  ),
+                                ],
+                                repeatForever: true,
+                                pause: Duration(milliseconds: 50),
+                                // isRepeatingAnimation: false,
+                                onNext: (p0, p1) {
+                                  setState(() {
+                                    //  tex = !tex;
+                                  });
+                                },
+                              ),
+                      ),
+                    )),
+                // AnimatedTextKit(
+                //   animatedTexts: [
+                //     ScaleAnimatedText(
+                //       !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+                //       textAlign: TextAlign.center,
+                //       scalingFactor: 2,
+                //       textStyle: GoogleFonts.aclonica(
+                //           color: !ghost ? Colors.red : Colors.green,
+                //           fontSize: 8,
+                //           fontWeight: FontWeight.w200,
+                //           fontStyle: FontStyle.italic),
+                //       duration: Duration(milliseconds: 1500),
+                //     ),
+                //     ScaleAnimatedText(
+                //       !ghost ? '☠️\nGhost Mode?' : 'normal mode?',
+                //       textAlign: TextAlign.center,
+                //       scalingFactor: 0.5,
+                //       textStyle: GoogleFonts.aclonica(
+                //           color: !ghost ? Colors.red : Colors.green,
+                //           fontSize: size.height < 300 ? 8 : 13,
+                //           fontWeight: FontWeight.w200,
+                //           fontStyle: FontStyle.italic),
+                //       duration: Duration(milliseconds: 1500),
+                //     ),
+                //   ],
+                //   repeatForever: true,
+                //   pause: Duration(milliseconds: 50),
+                //   // isRepeatingAnimation: false,
+                //   onNext: (p0, p1) {
+                //     setState(() {});
+                //   },
+                // ),
+                // InkWell(
+                //   splashColor: ghost ? Colors.green : Colors.red,
+                //   hoverColor: ghost ? Colors.green : Colors.red,
+                //   highlightColor: ghost ? Colors.green : Colors.red,
+                //   focusColor: ghost ? Colors.green : Colors.red,
+                //   onTap: () {
+                //     setState(() {
+                //       ghost = !ghost;
+                //     });
+                //   },
+                //   child: Container(
+                //     width: size.width * 0.4,
+                //     height: size.height * 0.08,
+                //     padding: const EdgeInsets.all(2),
+                //     decoration: BoxDecoration(
+                //       // color: Colors.white.withOpacity(0.0),
+                //       border: Border.all(color: Colors.blueGrey),
+                //       borderRadius:
+                //           const BorderRadius.all(Radius.circular(7.0)),
+                //     ),
+                //     alignment: Alignment.center,
+                //   ),
+                // ),
+                // Positioned(
+                //   child: IconButton(
+                //       onPressed: () {
+                //         setState(() {
+                //           opa = false;
+                //           move = !move;
+
+                //           opaa = false;
+                //           fly = true;
+                //           slap = false;
+                //           hold = false;
+                //           num = 2;
+                //           bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                //           biggerr = true;
+                //           random = new Random();
+                //           print('hello');
+                //         });
+                //       },
+                //       icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                //   left: size.width * 0.85,
+                // ),
+                // Positioned(
+                //   child: IconButton(
+                //       onPressed: () {
+                //         setState(() {
+                //           opa = false;
+                //           move = !move;
+
+                //           opaa = false;
+                //           fly = true;
+                //           slap = false;
+                //           hold = false;
+                //           num = 2;
+                //           bird = Platform.isAndroid ? '🧛🏻‍♂️' : '🧙‍♀️';
+                //           biggerr = true;
+                //           random = new Random();
+                //           print('hello');
+                //         });
+                //       },
+                //       icon: Icon(move ? Icons.restart_alt : Icons.start)),
+                //   right: size.width * 0.85,
+                // ),
               ],
             ),
             AnimatedPositioned(
@@ -733,7 +1115,9 @@ class _GameState extends State<Game> {
                           borderRadius: BorderRadius.circular(9.0),
                           child: imgPath != 'null'
                               ? Image.file(
-                                  File(opa && jump ? imgPath! : imgPath2!),
+                                  File((opa && !jump) && move
+                                      ? imgPath2!
+                                      : imgPath!),
                                   fit: BoxFit.fill,
                                   height: size.height * 0.1,
 
@@ -765,7 +1149,7 @@ class _GameState extends State<Game> {
                 //   });
                 // });
               },
-              left: !move ? 0 : size.width * 0.84,
+              left: !move ? 0 : size.width * 0.829, // 0.84,
               //   top: !move ? 0 : size.height * 0.5,
               bottom: move ? size.height * 0.045 : size.height * 0.5,
               curve: !ghost
@@ -797,18 +1181,40 @@ class _GameState extends State<Game> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      child: Text(
-                        !move
-                            ? ''
-                            : Platform.isAndroid
-                                ? '💩'
-                                : '🩴',
-                        style: TextStyle(
-                            fontSize: size.width * 0.04 > size.height * 0.05
-                                ? size.width * 0.04
-                                : size.height * 0.05,
-                            color: opa ? Colors.red : Colors.brown),
-                      ),
+                      child: imgPath3 != 'null'
+                          ? Container(
+                              width: size.width * 0.17,
+                              constraints:
+                                  BoxConstraints(maxHeight: size.height * 0.24),
+                              padding: const EdgeInsets.all(0),
+                              //    margin: const EdgeInsets.only(left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.0),
+                                // borderRadius:
+                                //     const BorderRadius.all(Radius.circular(7.0)),
+                              ),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(9.0),
+                                  child: Image.file(
+                                    File(imgPath3!),
+                                    fit: BoxFit.fill,
+                                    height: size.height * 0.1,
+
+                                    // width: double.infinity,
+                                  )))
+                          : Text(
+                              !move
+                                  ? ''
+                                  : Platform.isAndroid
+                                      ? '💩'
+                                      : '🩴',
+                              style: TextStyle(
+                                  fontSize:
+                                      size.width * 0.04 > size.height * 0.05
+                                          ? size.width * 0.04
+                                          : size.height * 0.05,
+                                  color: opa ? Colors.red : Colors.brown),
+                            ),
                     ),
                   )),
             ),

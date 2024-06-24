@@ -1,5 +1,4 @@
-import 'package:amit/custompic.dart';
-import 'package:amit/firsttheme.dart';
+import 'package:amit/custompic2.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,6 +66,70 @@ class _AppDrawerrState extends State<AppDrawerr> {
                   SizedBox(
                     height: 20,
                   ),
+//                   Center(
+//                       child: Padding(
+//                           padding: EdgeInsets.fromLTRB(
+//                               eight * 0.1, 3, eight * 0.1, 3),
+//                           child: ListTile(
+//                               tileColor:
+//                                   const Color.fromARGB(46, 158, 158, 158),
+//                               splashColor: Colors.amber,
+//                               leading: const Icon(Icons.photo),
+//                               //      minLeadingWidth: 100,
+//                               title: Center(
+//                                   child: const Text(
+//                                 'customize target',
+//                                 textAlign: TextAlign.center,
+//                                 //    overflow: TextOverflow.visible,
+//                                 style: const TextStyle(
+//                                   fontFamily: 'Aclonica',
+//                                 ),
+//                               )),
+//                               onTap: () async {
+//                                 Future.delayed(
+//                                     const Duration(milliseconds: 500), (() {
+//                                   Navigator.pushReplacement(context,
+//                                       MaterialPageRoute(builder: (context) {
+//                                     return CustomPic();
+//                                   }));
+//                                 }));
+//                               }))),
+//                   //  const Divider(),
+//                   SizedBox(
+//                     height: 20,
+//                   ),
+// //
+//                   Center(
+//                       child: Padding(
+//                           padding: EdgeInsets.fromLTRB(
+//                               eight * 0.1, 3, eight * 0.1, 3),
+//                           child: ListTile(
+//                               tileColor:
+//                                   const Color.fromARGB(46, 158, 158, 158),
+//                               splashColor: Colors.amber,
+//                               leading: const Icon(Icons.home_filled),
+//                               //      minLeadingWidth: 100,
+//                               title: Center(
+//                                   child: const Text(
+//                                 'Home page',
+//                                 textAlign: TextAlign.center,
+//                                 //    overflow: TextOverflow.visible,
+//                                 style: const TextStyle(
+//                                   fontFamily: 'Aclonica',
+//                                 ),
+//                               )),
+//                               onTap: () async {
+//                                 Future.delayed(
+//                                     const Duration(milliseconds: 500), (() {
+//                                   Navigator.pushReplacement(context,
+//                                       MaterialPageRoute(builder: (context) {
+//                                     return FirstTheme();
+//                                   }));
+//                                 }));
+//                               }))),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Center(
                       child: Padding(
                           padding: EdgeInsets.fromLTRB(
@@ -79,7 +142,7 @@ class _AppDrawerrState extends State<AppDrawerr> {
                               //      minLeadingWidth: 100,
                               title: Center(
                                   child: const Text(
-                                'customize target',
+                                'customize objects',
                                 textAlign: TextAlign.center,
                                 //    overflow: TextOverflow.visible,
                                 style: const TextStyle(
@@ -89,42 +152,9 @@ class _AppDrawerrState extends State<AppDrawerr> {
                               onTap: () async {
                                 Future.delayed(
                                     const Duration(milliseconds: 500), (() {
-                                  Navigator.pushReplacement(context,
+                                  Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return CustomPic();
-                                  }));
-                                }));
-                              }))),
-                  //  const Divider(),
-                  SizedBox(
-                    height: 20,
-                  ),
-//
-                  Center(
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              eight * 0.1, 3, eight * 0.1, 3),
-                          child: ListTile(
-                              tileColor:
-                                  const Color.fromARGB(46, 158, 158, 158),
-                              splashColor: Colors.amber,
-                              leading: const Icon(Icons.home_filled),
-                              //      minLeadingWidth: 100,
-                              title: Center(
-                                  child: const Text(
-                                'Home page',
-                                textAlign: TextAlign.center,
-                                //    overflow: TextOverflow.visible,
-                                style: const TextStyle(
-                                  fontFamily: 'Aclonica',
-                                ),
-                              )),
-                              onTap: () async {
-                                Future.delayed(
-                                    const Duration(milliseconds: 500), (() {
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return FirstTheme();
+                                    return CustomPic2();
                                   }));
                                 }));
                               }))),
