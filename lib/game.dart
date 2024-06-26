@@ -33,8 +33,12 @@ class _GameState extends State<Game> {
   String? imgPath;
   String? imgPath2;
   String? imgPath3;
+  String? imgPath5;
 
   bool? hard;
+  bool? fallingObject;
+  bool? sparkObject;
+  bool? TargetSmall;
 
   int num = 2;
   var i;
@@ -85,6 +89,7 @@ class _GameState extends State<Game> {
     get1();
     get2();
     get3();
+    get5();
   }
 
   @override
@@ -135,6 +140,18 @@ class _GameState extends State<Game> {
       hard = (prefs.getBool("hard") == null) || (prefs.getBool("hard") == false)
           ? false
           : true;
+      fallingObject = (prefs.getBool("fallingObject") == null) ||
+              (prefs.getBool("fallingObject") == false)
+          ? false
+          : true;
+      sparkObject = (prefs.getBool("sparkObject") == null) ||
+              (prefs.getBool("sparkObject") == false)
+          ? false
+          : true;
+      TargetSmall = (prefs.getBool("TargetSmall") == null) ||
+              (prefs.getBool("TargetSmall") == false)
+          ? false
+          : true;
     });
   }
 
@@ -155,6 +172,15 @@ class _GameState extends State<Game> {
       imgPath3 = prefs.getString("image3") == null
           ? 'null'
           : prefs.getString("image3");
+    });
+  }
+
+  void get5() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath5 = prefs.getString("image5") == null
+          ? 'null'
+          : prefs.getString("image5");
     });
   }
 
@@ -316,27 +342,35 @@ class _GameState extends State<Game> {
 //             ),
 //           ],
 //         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              ghost ? 'Ghost mode' : 'Ghost mode ?',
-              textAlign: TextAlign.center,
-              //    overflow: TextOverflow.visible,
-              style: TextStyle(
-                  fontFamily: 'Aclonica',
-                  color: ghost ? Colors.red : Colors.white.withOpacity(0.3)),
-            ),
-            Switch(
-              activeTrackColor: Colors.red,
-              onChanged: (value) {
-                setState(() {
-                  ghost = !ghost;
-                });
-              },
-              value: ghost,
-            ),
-          ],
+        title: Center(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Text(
+                ghost ? 'Ghost mode' : 'Ghost mode ?',
+                textAlign: TextAlign.center,
+                //    overflow: TextOverflow.visible,
+                style: TextStyle(
+                    letterSpacing: size.width * 0.18 / title.length,
+                    fontSize: size.height * 0.17 / title.length,
+                    fontFamily: 'Aclonica',
+                    color: ghost ? Colors.red : Colors.white.withOpacity(0.3)),
+              ),
+              // SizedBox(
+              //   width: 5,
+              // child:
+              Switch(
+                activeTrackColor: Colors.red,
+                onChanged: (value) {
+                  setState(() {
+                    ghost = !ghost;
+                  });
+                },
+                value: ghost,
+              ),
+              // ),
+            ],
+          ),
         ),
 
         // Stack(
@@ -1068,7 +1102,11 @@ class _GameState extends State<Game> {
                 duration: Duration(milliseconds: next(50, 300)),
                 left: size.width * 0.77,
                 //     top: !jump ? size.height * 0.47 : size.height * 0.3,
-                bottom: jump ? size.height * 0.3 : 0,
+                bottom: jump
+                    ? size.height * 0.3 //: 0,
+                    : !TargetSmall!
+                        ? 0
+                        : size.height * 0.04,
                 child: IconButton(
                   splashColor: Colors.red,
                   hoverColor: Colors.red,
@@ -1101,12 +1139,30 @@ class _GameState extends State<Game> {
                             )
                           : SizedBox(),
                       Container(
-                        width: size.width * 0.17,
-                        constraints:
-                            BoxConstraints(maxHeight: size.height * 0.24),
+                        width: !TargetSmall!
+                            ? size.width * 0.17
+                            : size.width * 0.05 > size.height * 0.03
+                                ? size.width * 0.05
+                                : size.height * 0.03, // size.width * 0.17,
+                        constraints: BoxConstraints(
+                            maxHeight: !TargetSmall!
+                                ? size.height * 0.24
+                                : size.height * 0.03),
+                        // width: size.width * 0.17,
+                        // constraints:
+                        //     BoxConstraints(maxHeight: size.height * 0.24),
                         padding: const EdgeInsets.all(0),
                         //    margin: const EdgeInsets.only(left: 5, right: 5),
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: opa && move && !jump
+                                    ? Colors.red.withOpacity(0.7)
+                                    : Colors.white.withOpacity(0.0),
+                                blurRadius: 20,
+                                spreadRadius: -0.12,
+                                offset: Offset(-6, 6))
+                          ],
                           color: Colors.white.withOpacity(0.0),
                           // borderRadius:
                           //     const BorderRadius.all(Radius.circular(7.0)),
@@ -1163,7 +1219,11 @@ class _GameState extends State<Game> {
                           hard! ? (rand..shuffle()).first : next(500, 3000))
                   : Duration(seconds: 0),
               child: AnimatedOpacity(
-                  opacity: opa ? 0.4 : 1,
+                  opacity: opa
+                      ? fallingObject!
+                          ? 0.7
+                          : 0.24
+                      : 1,
                   duration: Duration(milliseconds: 100),
                   child: GestureDetector(
                     onTap: () {
@@ -1181,14 +1241,31 @@ class _GameState extends State<Game> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      child: imgPath3 != 'null'
+                      child: imgPath5 != 'null' && opa
                           ? Container(
-                              width: size.width * 0.17,
-                              constraints:
-                                  BoxConstraints(maxHeight: size.height * 0.24),
+                              // width: size.width * 0.17,
+                              // constraints:
+                              //     BoxConstraints(maxHeight: size.height * 0.24),
+                              width: fallingObject!
+                                  ? size.width * 0.17
+                                  : size.width * 0.05 > size.height * 0.03
+                                      ? size.width * 0.05
+                                      : size.height *
+                                          0.03, // size.width * 0.17,
+                              constraints: BoxConstraints(
+                                  maxHeight: fallingObject!
+                                      ? size.height * 0.24
+                                      : size.height * 0.03),
                               padding: const EdgeInsets.all(0),
                               //    margin: const EdgeInsets.only(left: 5, right: 5),
                               decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.deepOrange.withOpacity(0.8),
+                                      blurRadius: 8,
+                                      spreadRadius: -0.8,
+                                      offset: Offset(4, -4))
+                                ],
                                 color: Colors.white.withOpacity(0.0),
                                 // borderRadius:
                                 //     const BorderRadius.all(Radius.circular(7.0)),
@@ -1196,25 +1273,61 @@ class _GameState extends State<Game> {
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(9.0),
                                   child: Image.file(
-                                    File(imgPath3!),
+                                    File(imgPath5!),
                                     fit: BoxFit.fill,
                                     height: size.height * 0.1,
 
                                     // width: double.infinity,
                                   )))
-                          : Text(
-                              !move
-                                  ? ''
-                                  : Platform.isAndroid
-                                      ? '💩'
-                                      : '🩴',
-                              style: TextStyle(
-                                  fontSize:
-                                      size.width * 0.04 > size.height * 0.05
-                                          ? size.width * 0.04
-                                          : size.height * 0.05,
-                                  color: opa ? Colors.red : Colors.brown),
-                            ),
+                          : imgPath3 != 'null'
+                              ? Container(
+                                  width: fallingObject!
+                                      ? size.width * 0.17
+                                      : size.width * 0.05 > size.height * 0.03
+                                          ? size.width * 0.05
+                                          : size.height *
+                                              0.03, // size.width * 0.17,
+                                  constraints: BoxConstraints(
+                                      maxHeight: fallingObject!
+                                          ? size.height * 0.24
+                                          : size.height * 0.03),
+                                  padding: const EdgeInsets.all(0),
+                                  //    margin: const EdgeInsets.only(left: 5, right: 5),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.deepOrange
+                                              .withOpacity(0.8),
+                                          blurRadius: 8,
+                                          spreadRadius: -0.8,
+                                          offset: Offset(4, -4))
+                                    ],
+                                    color: Colors.white.withOpacity(0.0),
+                                    // borderRadius:
+                                    //     const BorderRadius.all(Radius.circular(7.0)),
+                                  ),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(9.0),
+                                      child: Image.file(
+                                        File(imgPath3!),
+                                        fit: BoxFit.fill,
+                                        height: size.height * 0.1,
+
+                                        // width: double.infinity,
+                                      )))
+                              : Text(
+                                  !move
+                                      ? ''
+                                      : Platform.isAndroid
+                                          ? '💩'
+                                          : '🩴',
+                                  style: TextStyle(
+                                      fontSize:
+                                          size.width * 0.04 > size.height * 0.05
+                                              ? size.width * 0.04
+                                              : size.height * 0.05,
+                                      color: opa ? Colors.red : Colors.brown),
+                                ),
                     ),
                   )),
             ),

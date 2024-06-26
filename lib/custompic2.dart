@@ -35,6 +35,8 @@ class _CustomPic2State extends State<CustomPic2> {
     //   });
     get1();
     get2();
+    get3();
+
     //  Provider.of<GreatPlaces>(context, listen: false).fetchAndSetPlaces();
   }
 
@@ -46,15 +48,22 @@ class _CustomPic2State extends State<CustomPic2> {
 
   String? imgPath;
   String? imgPath2;
+  String? imgPath3;
 
   File? _pickedImage;
   File? _pickedImage2;
+  File? _pickedImage3;
+
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
   }
 
   void _selectImage2(File pickedImage) {
     _pickedImage2 = pickedImage;
+  }
+
+  void _selectImage3(File pickedImage) {
+    _pickedImage3 = pickedImage;
   }
 
   static Future<bool> saveImage(List<int> imageBytes) async {
@@ -95,6 +104,14 @@ class _CustomPic2State extends State<CustomPic2> {
     });
   }
 
+  void save3(String val) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString("image5", val);
+    });
+    print(prefs.getString("image5"));
+  }
+
   void get1() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -110,6 +127,15 @@ class _CustomPic2State extends State<CustomPic2> {
       imgPath2 = prefs.getString("image4") == null
           ? 'null'
           : prefs.getString("image4");
+    });
+  }
+
+  void get3() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath3 = prefs.getString("image5") == null
+          ? 'null'
+          : prefs.getString("image5");
     });
   }
 
@@ -131,6 +157,12 @@ class _CustomPic2State extends State<CustomPic2> {
       imgPath2 = prefs.getString("image4") == null
           ? 'null'
           : prefs.getString("image4");
+      prefs.getString("image5") != null
+          ? pics.add(prefs.getString("image5"))
+          : null;
+      imgPath3 = prefs.getString("image5") == null
+          ? 'null'
+          : prefs.getString("image5");
     });
     //  print(pics);
     return pics;
@@ -174,7 +206,10 @@ class _CustomPic2State extends State<CustomPic2> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.arrow_back_ios),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  //   size: size.height * 0.05,
+                ),
               ),
               title: Container(
                   alignment: Alignment.center,
@@ -230,25 +265,93 @@ class _CustomPic2State extends State<CustomPic2> {
           SingleChildScrollView(
               child: SizedBox(
                   height: size.height > 500
-                      ? size.height * 0.8
+                      ? size.height * 1.5
                       : size.height > 400
-                          ? size.height * 1.1
+                          ? size.height * 2.0
                           : size.height > 300
-                              ? size.height * 1.4
-                              : size.height * 1.9,
+                              ? size.height * 3.0
+                              : size.height * 4.0,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Divider(thickness: 2),
-                        Text('Image 1 (falling object)'),
-                        ImageInput(_selectImage),
-//
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            _pickedImage != null
-                                ? AnimatedTextKit(
-                                    onTap: () async {
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            children: [
+                              Divider(thickness: 2),
+                              Text('Image 1 (falling object)'),
+                              ImageInput(_selectImage),
+                              //
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  _pickedImage != null
+                                      ? AnimatedTextKit(
+                                          onTap: () async {
+                                            _pickedImage == null
+                                                ? ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                    content: Text(
+                                                      ' image1  not provided',
+                                                    ),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .errorColor,
+                                                  ))
+                                                : {
+                                                    save1(_pickedImage!.path
+                                                        .toString())
+                                                  };
+                                            setState(() {
+                                              _pickedImage = null;
+                                            });
+                                          },
+                                          animatedTexts: [
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 2,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: 8,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 0.5,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: size.height < 300
+                                                      ? 10
+                                                      : 16,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                          ],
+                                          repeatForever: true,
+                                          pause: Duration(milliseconds: 50),
+                                          // isRepeatingAnimation: false,
+                                          onNext: (p0, p1) {
+                                            setState(() {
+                                              //  tex = !tex;
+                                            });
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  IconButton(
+                                    color: _pickedImage == null
+                                        ? null
+                                        : Colors.deepPurple,
+                                    icon: Icon(Icons.save_alt_rounded),
+                                    onPressed: () {
                                       _pickedImage == null
                                           ? ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
@@ -267,74 +370,83 @@ class _CustomPic2State extends State<CustomPic2> {
                                         _pickedImage = null;
                                       });
                                     },
-                                    animatedTexts: [
-                                      ScaleAnimatedText(
-                                        '💾',
-                                        textAlign: TextAlign.center,
-                                        scalingFactor: 2,
-                                        textStyle: GoogleFonts.aclonica(
-                                            color: Colors.white,
-                                            fontSize: 8,
-                                            fontWeight: FontWeight.w200,
-                                            fontStyle: FontStyle.italic),
-                                        duration: Duration(milliseconds: 1500),
-                                      ),
-                                      ScaleAnimatedText(
-                                        '💾',
-                                        textAlign: TextAlign.center,
-                                        scalingFactor: 0.5,
-                                        textStyle: GoogleFonts.aclonica(
-                                            color: Colors.white,
-                                            fontSize:
-                                                size.height < 300 ? 10 : 16,
-                                            fontWeight: FontWeight.w200,
-                                            fontStyle: FontStyle.italic),
-                                        duration: Duration(milliseconds: 1500),
-                                      ),
-                                    ],
-                                    repeatForever: true,
-                                    pause: Duration(milliseconds: 50),
-                                    // isRepeatingAnimation: false,
-                                    onNext: (p0, p1) {
-                                      setState(() {
-                                        //  tex = !tex;
-                                      });
-                                    },
-                                  )
-                                : SizedBox(),
-                            IconButton(
-                              color: _pickedImage == null
-                                  ? null
-                                  : Colors.deepPurple,
-                              icon: Icon(Icons.save_alt_rounded),
-                              onPressed: () {
-                                _pickedImage == null
-                                    ? ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                        duration: Duration(seconds: 2),
-                                        content: Text(
-                                          ' image1  not provided',
-                                        ),
-                                        backgroundColor:
-                                            Theme.of(context).errorColor,
-                                      ))
-                                    : {save1(_pickedImage!.path.toString())};
-                                setState(() {
-                                  _pickedImage = null;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        Divider(thickness: 2),
-                        Text('Image 2 (spark object)'),
-                        ImageInput(_selectImage2),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            _pickedImage2 != null
-                                ? AnimatedTextKit(
-                                    onTap: () async {
+                                  ),
+                                ],
+                              ),
+                              Divider(thickness: 2),
+                              Text('Image 2 (spark object)'),
+                              ImageInput(_selectImage2),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  _pickedImage2 != null
+                                      ? AnimatedTextKit(
+                                          onTap: () async {
+                                            _pickedImage2 == null
+                                                ? ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                    content: Text(
+                                                      ' image2  not provided',
+                                                    ),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .errorColor,
+                                                  ))
+                                                : {
+                                                    save2(_pickedImage2!.path
+                                                        .toString())
+                                                  };
+                                            setState(() {
+                                              _pickedImage2 = null;
+                                            });
+                                          },
+                                          animatedTexts: [
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 2,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: 8,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 0.5,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: size.height < 300
+                                                      ? 10
+                                                      : 16,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                          ],
+                                          repeatForever: true,
+                                          pause: Duration(milliseconds: 50),
+                                          // isRepeatingAnimation: false,
+                                          onNext: (p0, p1) {
+                                            setState(() {
+                                              //  tex = !tex;
+                                            });
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  IconButton(
+                                    color: _pickedImage2 == null
+                                        ? null
+                                        : Colors.deepPurple,
+                                    // hoverColor: Colors.deepPurple.withOpacity(0.3),
+                                    icon: Icon(Icons.save_alt_rounded),
+                                    onPressed: () async {
                                       _pickedImage2 == null
                                           ? ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
@@ -353,191 +465,261 @@ class _CustomPic2State extends State<CustomPic2> {
                                         _pickedImage2 = null;
                                       });
                                     },
-                                    animatedTexts: [
-                                      ScaleAnimatedText(
-                                        '💾',
-                                        textAlign: TextAlign.center,
-                                        scalingFactor: 2,
-                                        textStyle: GoogleFonts.aclonica(
-                                            color: Colors.white,
-                                            fontSize: 8,
-                                            fontWeight: FontWeight.w200,
-                                            fontStyle: FontStyle.italic),
-                                        duration: Duration(milliseconds: 1500),
-                                      ),
-                                      ScaleAnimatedText(
-                                        '💾',
-                                        textAlign: TextAlign.center,
-                                        scalingFactor: 0.5,
-                                        textStyle: GoogleFonts.aclonica(
-                                            color: Colors.white,
-                                            fontSize:
-                                                size.height < 300 ? 10 : 16,
-                                            fontWeight: FontWeight.w200,
-                                            fontStyle: FontStyle.italic),
-                                        duration: Duration(milliseconds: 1500),
-                                      ),
-                                    ],
-                                    repeatForever: true,
-                                    pause: Duration(milliseconds: 50),
-                                    // isRepeatingAnimation: false,
-                                    onNext: (p0, p1) {
+                                  ),
+                                ],
+                              ),
+                              Divider(thickness: 2),
+                              Text('Image 3 (falling object on collision)'),
+                              ImageInput(_selectImage3),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  _pickedImage3 != null
+                                      ? AnimatedTextKit(
+                                          onTap: () async {
+                                            _pickedImage3 == null
+                                                ? ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                    content: Text(
+                                                      ' image3  not provided',
+                                                    ),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .errorColor,
+                                                  ))
+                                                : {
+                                                    save3(_pickedImage3!.path
+                                                        .toString())
+                                                  };
+                                            setState(() {
+                                              _pickedImage3 = null;
+                                            });
+                                          },
+                                          animatedTexts: [
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 2,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: 8,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 0.5,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: size.height < 300
+                                                      ? 10
+                                                      : 16,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                          ],
+                                          repeatForever: true,
+                                          pause: Duration(milliseconds: 50),
+                                          // isRepeatingAnimation: false,
+                                          onNext: (p0, p1) {
+                                            setState(() {
+                                              //  tex = !tex;
+                                            });
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  IconButton(
+                                    color: _pickedImage3 == null
+                                        ? null
+                                        : Colors.deepPurple,
+                                    // hoverColor: Colors.deepPurple.withOpacity(0.3),
+                                    icon: Icon(Icons.save_alt_rounded),
+                                    onPressed: () async {
+                                      _pickedImage3 == null
+                                          ? ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                              duration: Duration(seconds: 2),
+                                              content: Text(
+                                                ' image2  not provided',
+                                              ),
+                                              backgroundColor:
+                                                  Theme.of(context).errorColor,
+                                            ))
+                                          : {
+                                              save3(_pickedImage3!.path
+                                                  .toString())
+                                            };
                                       setState(() {
-                                        //  tex = !tex;
+                                        _pickedImage3 = null;
                                       });
                                     },
-                                  )
-                                : SizedBox(),
-                            IconButton(
-                              color: _pickedImage2 == null
-                                  ? null
-                                  : Colors.deepPurple,
-                              // hoverColor: Colors.deepPurple.withOpacity(0.3),
-                              icon: Icon(Icons.save_alt_rounded),
-                              onPressed: () async {
-                                _pickedImage2 == null
-                                    ? ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                        duration: Duration(seconds: 2),
-                                        content: Text(
-                                          ' image2  not provided',
-                                        ),
-                                        backgroundColor:
-                                            Theme.of(context).errorColor,
-                                      ))
-                                    : {save2(_pickedImage2!.path.toString())};
-                                setState(() {
-                                  _pickedImage2 = null;
-                                });
-                              },
-                            ),
-                          ],
+                                  ),
+                                ],
+                              ),
+                              Divider(thickness: 2),
+                            ],
+                          ),
                         ),
-                        Divider(thickness: 2),
-                        FutureBuilder<List>(
-                            future: picsx(),
-                            builder: (context, snapshot) {
-                              if (ConnectionState.waiting == true) {
-                                return Text(
-                                  'loading...',
-                                  style: GoogleFonts.habibi(
-                                      fontSize: 20,
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic),
-                                );
-                              }
+                        Expanded(
+                          flex: 1,
+                          child: FutureBuilder<List>(
+                              future: picsx(),
+                              builder: (context, snapshot) {
+                                if (ConnectionState.waiting == true) {
+                                  return Text(
+                                    'loading...',
+                                    style: GoogleFonts.habibi(
+                                        fontSize: 20,
+                                        color: Colors.redAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic),
+                                  );
+                                }
 
-                              if (!snapshot.hasData) {
-                                return Center(
-                                    child: Text(
-                                  _pickedImage != null || _pickedImage2 != null
-                                      ? 'save the pic to approve'
-                                      : 'no pics yet !! ...',
-                                  style: GoogleFonts.habibi(
-                                      fontSize: 20,
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic),
-                                ));
-                              }
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                      child: Text(
+                                    _pickedImage != null ||
+                                            _pickedImage2 != null ||
+                                            _pickedImage3 != null
+                                        ? 'save the pic to approve'
+                                        : 'no pics yet !! ...',
+                                    style: GoogleFonts.habibi(
+                                        fontSize: 20,
+                                        color: Colors.redAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic),
+                                  ));
+                                }
 
-                              return ConnectionState.waiting == true
-                                  ? Text('loading...')
-                                  : snapshot.data!.isEmpty
-                                      ? Center(
-                                          child: Text(
-                                          _pickedImage != null ||
-                                                  _pickedImage2 != null
-                                              ? 'save the pic to approve'
-                                              : 'no pics yet !! ...',
-                                          style: GoogleFonts.habibi(
-                                              fontSize: 20,
-                                              color: Colors.redAccent,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.italic),
-                                        ))
-                                      :
-                                      // greatPlaces.items.length <= 0
-                                      //                 ? SizedBox()
-                                      //                 :
-                                      // Expanded(
-                                      //     flex: 2,
-                                      //     child:
-                                      SizedBox(
-                                          height: size.height * 0.15,
-                                          child: ListView.builder(
-                                            itemCount: // 2,
-                                                snapshot.data!.length
-                                                    .clamp(0, 2),
-                                            itemBuilder: (ctx, i) => ListTile(
-                                              onTap: () {},
-                                              onLongPress: () {},
-                                              leading: CircleAvatar(
-                                                backgroundImage: FileImage(
-                                                  File(snapshot.data![i]),
+                                return ConnectionState.waiting == true
+                                    ? Text('loading...')
+                                    : snapshot.data!.isEmpty
+                                        ? Center(
+                                            child: Text(
+                                            _pickedImage != null ||
+                                                    _pickedImage2 != null ||
+                                                    _pickedImage3 != null
+                                                ? 'save the pic to approve'
+                                                : 'no pics yet !! ...',
+                                            style: GoogleFonts.habibi(
+                                                fontSize: 20,
+                                                color: Colors.redAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle: FontStyle.italic),
+                                          ))
+                                        :
+                                        // greatPlaces.items.length <= 0
+                                        //                 ? SizedBox()
+                                        //                 :
+
+                                        Container(
+                                            alignment: Alignment.topCenter,
+                                            height: size.height * 0.15,
+                                            width: size.width * 0.7,
+                                            child: ListView.builder(
+                                              itemCount: // 2,
+                                                  snapshot.data!.length
+                                                      .clamp(0, 3),
+                                              itemBuilder: (ctx, i) => ListTile(
+                                                onTap: () {},
+                                                onLongPress: () {},
+                                                leading: CircleAvatar(
+                                                  backgroundImage: FileImage(
+                                                    File(snapshot.data![i]),
+                                                  ),
                                                 ),
-                                              ),
-                                              title: snapshot.data![i]
-                                                          .toString() ==
-                                                      imgPath
-                                                  ? Text('image 1')
-                                                  : Text('image 2'),
+                                                title: snapshot.data![i]
+                                                            .toString() ==
+                                                        imgPath
+                                                    ? Text('image 1')
+                                                    : snapshot.data![i]
+                                                                .toString() ==
+                                                            imgPath2
+                                                        ? Text('image 2')
+                                                        : snapshot.data![i]
+                                                                    .toString() ==
+                                                                imgPath3
+                                                            ? Text('image 3')
+                                                            : Text('image x'),
 
-                                              // Text('image ${i + 1}'),
-                                              trailing: IconButton(
-                                                onPressed: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (ctx) =>
-                                                        AlertDialog(
-                                                      title: const Text(
-                                                          'Are you sure?'),
-                                                      content: const Text(
-                                                        'Do you want to remove this pic?',
+                                                // Text('image ${i + 1}'),
+                                                trailing: IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (ctx) =>
+                                                          AlertDialog(
+                                                        title: const Text(
+                                                            'Are you sure?'),
+                                                        content: const Text(
+                                                          'Do you want to remove this pic?',
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'No'),
+                                                            onPressed: () {
+                                                              Navigator.of(ctx)
+                                                                  .pop(false);
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'Yes'),
+                                                            onPressed:
+                                                                () async {
+                                                              SharedPreferences
+                                                                  storage =
+                                                                  await SharedPreferences
+                                                                      .getInstance();
+                                                              snapshot.data![i]
+                                                                          .toString() ==
+                                                                      imgPath
+                                                                  ? storage.remove(
+                                                                      'image3')
+                                                                  : snapshot.data![i]
+                                                                              .toString() ==
+                                                                          imgPath2
+                                                                      ? storage
+                                                                          .remove(
+                                                                              'image4')
+                                                                      : storage
+                                                                          .remove(
+                                                                              'image5');
+                                                              Navigator.of(ctx)
+                                                                  .pop(true);
+                                                            },
+                                                          ),
+                                                        ],
                                                       ),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child:
-                                                              const Text('No'),
-                                                          onPressed: () {
-                                                            Navigator.of(ctx)
-                                                                .pop(false);
-                                                          },
-                                                        ),
-                                                        TextButton(
-                                                          child:
-                                                              const Text('Yes'),
-                                                          onPressed: () async {
-                                                            SharedPreferences
-                                                                storage =
-                                                                await SharedPreferences
-                                                                    .getInstance();
-                                                            snapshot.data![i]
-                                                                        .toString() ==
-                                                                    imgPath
-                                                                ? storage.remove(
-                                                                    'image3')
-                                                                : storage.remove(
-                                                                    'image4');
-                                                            Navigator.of(ctx)
-                                                                .pop(true);
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                                icon: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          // ) //;
-                                        );
-                            }),
+                                          );
+                              }),
+                        ),
+                        // size.height > 300 && size.height < 500
+                        // size.height > 500
+                        //  ?
+                        // Expanded(flex: 1, child:
+                        // SizedBox(
+                        //     width: size.width * 0.7,
+                        //     child: Divider(thickness: 200))
+                        // : SizedBox(),
                       ]))),
 
       // IconButton(
