@@ -541,10 +541,17 @@ class _Game2State extends State<Game2> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Platform.isIOS
+                            ? Center(
+                                child: Text(
+                                '🔥',
+                                style: TextStyle(fontSize: hard! ? 30 : 1),
+                              ))
+                            : SizedBox(),
                         AnimatedTextKit(
                           animatedTexts: [
                             ColorizeAnimatedText(
-                              '☠️',
+                              Platform.isIOS ? '' : '☠️',
                               textStyle: TextStyle(fontSize: hard! ? 30 : 1),
                               colors: [
                                 Colors.redAccent.withOpacity(hard! ? 0.7 : 0),
