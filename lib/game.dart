@@ -34,6 +34,8 @@ class _GameState extends State<Game> {
   String? imgPath2;
   String? imgPath3;
   String? imgPath5;
+  String? imgPath6;
+  String? imgPath7;
 
   bool? hard;
   bool? fallingObject;
@@ -90,6 +92,8 @@ class _GameState extends State<Game> {
     get2();
     get3();
     get5();
+    get6();
+    get7();
   }
 
   @override
@@ -181,6 +185,28 @@ class _GameState extends State<Game> {
       imgPath5 = prefs.getString("image5") == null
           ? 'null'
           : prefs.getString("image5");
+    });
+  }
+
+  void get6() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath6 = prefs.getString("image6") == null
+          ? imgPath3 = prefs.getString("image3") == null
+              ? 'null'
+              : prefs.getString("image3")
+          : prefs.getString("image6");
+    });
+  }
+
+  void get7() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath7 = prefs.getString("image7") == null
+          ? imgPath3 = prefs.getString("image2") == null
+              ? 'null'
+              : prefs.getString("image2")
+          : prefs.getString("image7");
     });
   }
 
@@ -1173,7 +1199,9 @@ class _GameState extends State<Game> {
                               ? Image.file(
                                   File((opa && !jump) && move
                                       ? imgPath2!
-                                      : imgPath!),
+                                      : jump
+                                          ? imgPath7!
+                                          : imgPath!),
                                   fit: BoxFit.fill,
                                   height: size.height * 0.1,
 
@@ -1222,7 +1250,7 @@ class _GameState extends State<Game> {
                   opacity: opa
                       ? fallingObject!
                           ? 0.7
-                          : 0.24
+                          : 0.66
                       : 1,
                   duration: Duration(milliseconds: 100),
                   child: GestureDetector(
@@ -1241,7 +1269,7 @@ class _GameState extends State<Game> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      child: imgPath5 != 'null' && opa
+                      child: imgPath5 != 'null' && opa && !jump
                           ? Container(
                               // width: size.width * 0.17,
                               // constraints:
@@ -1279,8 +1307,11 @@ class _GameState extends State<Game> {
 
                                     // width: double.infinity,
                                   )))
-                          : imgPath3 != 'null'
+                          : imgPath6 != 'null' && opa && jump
                               ? Container(
+                                  // width: size.width * 0.17,
+                                  // constraints:
+                                  //     BoxConstraints(maxHeight: size.height * 0.24),
                                   width: fallingObject!
                                       ? size.width * 0.17
                                       : size.width * 0.05 > size.height * 0.03
@@ -1309,25 +1340,64 @@ class _GameState extends State<Game> {
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(9.0),
                                       child: Image.file(
-                                        File(imgPath3!),
+                                        File(imgPath6!),
                                         fit: BoxFit.fill,
                                         height: size.height * 0.1,
 
                                         // width: double.infinity,
                                       )))
-                              : Text(
-                                  !move
-                                      ? ''
-                                      : Platform.isAndroid
-                                          ? '💩'
-                                          : '🩴',
-                                  style: TextStyle(
-                                      fontSize:
-                                          size.width * 0.04 > size.height * 0.05
+                              : imgPath3 != 'null'
+                                  ? Container(
+                                      width: fallingObject!
+                                          ? size.width * 0.17
+                                          : size.width * 0.05 >
+                                                  size.height * 0.03
+                                              ? size.width * 0.05
+                                              : size.height *
+                                                  0.03, // size.width * 0.17,
+                                      constraints: BoxConstraints(
+                                          maxHeight: fallingObject!
+                                              ? size.height * 0.24
+                                              : size.height * 0.03),
+                                      padding: const EdgeInsets.all(0),
+                                      //    margin: const EdgeInsets.only(left: 5, right: 5),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.deepOrange
+                                                  .withOpacity(0.8),
+                                              blurRadius: 8,
+                                              spreadRadius: -0.8,
+                                              offset: Offset(4, -4))
+                                        ],
+                                        color: Colors.white.withOpacity(0.0),
+                                        // borderRadius:
+                                        //     const BorderRadius.all(Radius.circular(7.0)),
+                                      ),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(9.0),
+                                          child: Image.file(
+                                            File(imgPath3!),
+                                            fit: BoxFit.fill,
+                                            height: size.height * 0.1,
+
+                                            // width: double.infinity,
+                                          )))
+                                  : Text(
+                                      !move
+                                          ? ''
+                                          : Platform.isAndroid
+                                              ? '💩'
+                                              : '🩴',
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.04 >
+                                                  size.height * 0.05
                                               ? size.width * 0.04
                                               : size.height * 0.05,
-                                      color: opa ? Colors.red : Colors.brown),
-                                ),
+                                          color:
+                                              opa ? Colors.red : Colors.brown),
+                                    ),
                     ),
                   )),
             ),

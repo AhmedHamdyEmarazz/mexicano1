@@ -36,6 +36,7 @@ class _CustomPic2State extends State<CustomPic2> {
     get1();
     get2();
     get3();
+    get4();
 
     //  Provider.of<GreatPlaces>(context, listen: false).fetchAndSetPlaces();
   }
@@ -49,10 +50,12 @@ class _CustomPic2State extends State<CustomPic2> {
   String? imgPath;
   String? imgPath2;
   String? imgPath3;
+  String? imgPath4;
 
   File? _pickedImage;
   File? _pickedImage2;
   File? _pickedImage3;
+  File? _pickedImage4;
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
@@ -64,6 +67,10 @@ class _CustomPic2State extends State<CustomPic2> {
 
   void _selectImage3(File pickedImage) {
     _pickedImage3 = pickedImage;
+  }
+
+  void _selectImage4(File pickedImage) {
+    _pickedImage4 = pickedImage;
   }
 
   static Future<bool> saveImage(List<int> imageBytes) async {
@@ -112,6 +119,14 @@ class _CustomPic2State extends State<CustomPic2> {
     print(prefs.getString("image5"));
   }
 
+  void save4(String val) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString("image6", val);
+    });
+    print(prefs.getString("image6"));
+  }
+
   void get1() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -139,6 +154,15 @@ class _CustomPic2State extends State<CustomPic2> {
     });
   }
 
+  void get4() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imgPath4 = prefs.getString("image6") == null
+          ? 'null'
+          : prefs.getString("image6");
+    });
+  }
+
   Future<List> picsx() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List pics = [];
@@ -163,6 +187,12 @@ class _CustomPic2State extends State<CustomPic2> {
       imgPath3 = prefs.getString("image5") == null
           ? 'null'
           : prefs.getString("image5");
+      prefs.getString("image6") != null
+          ? pics.add(prefs.getString("image6"))
+          : null;
+      imgPath4 = prefs.getString("image6") == null
+          ? 'null'
+          : prefs.getString("image6");
     });
     //  print(pics);
     return pics;
@@ -267,15 +297,15 @@ class _CustomPic2State extends State<CustomPic2> {
                   height: size.height > 500
                       ? size.height * 1.5
                       : size.height > 400
-                          ? size.height * 2.0
+                          ? size.height * 2.2
                           : size.height > 300
                               ? size.height * 3.0
-                              : size.height * 4.0,
+                              : size.height * 4.5,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 3,
                           child: Column(
                             children: [
                               Divider(thickness: 2),
@@ -547,7 +577,7 @@ class _CustomPic2State extends State<CustomPic2> {
                                               .showSnackBar(SnackBar(
                                               duration: Duration(seconds: 2),
                                               content: Text(
-                                                ' image2  not provided',
+                                                ' image3  not provided',
                                               ),
                                               backgroundColor:
                                                   Theme.of(context).errorColor,
@@ -558,6 +588,101 @@ class _CustomPic2State extends State<CustomPic2> {
                                             };
                                       setState(() {
                                         _pickedImage3 = null;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Divider(thickness: 2),
+                              Text('Image 4 (non collision falling object)'),
+                              ImageInput(_selectImage4),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  _pickedImage4 != null
+                                      ? AnimatedTextKit(
+                                          onTap: () async {
+                                            _pickedImage4 == null
+                                                ? ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                    content: Text(
+                                                      ' image4  not provided',
+                                                    ),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .errorColor,
+                                                  ))
+                                                : {
+                                                    save4(_pickedImage4!.path
+                                                        .toString())
+                                                  };
+                                            setState(() {
+                                              _pickedImage4 = null;
+                                            });
+                                          },
+                                          animatedTexts: [
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 2,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: 8,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                            ScaleAnimatedText(
+                                              '💾',
+                                              textAlign: TextAlign.center,
+                                              scalingFactor: 0.5,
+                                              textStyle: GoogleFonts.aclonica(
+                                                  color: Colors.white,
+                                                  fontSize: size.height < 300
+                                                      ? 10
+                                                      : 16,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontStyle: FontStyle.italic),
+                                              duration:
+                                                  Duration(milliseconds: 1500),
+                                            ),
+                                          ],
+                                          repeatForever: true,
+                                          pause: Duration(milliseconds: 50),
+                                          // isRepeatingAnimation: false,
+                                          onNext: (p0, p1) {
+                                            setState(() {
+                                              //  tex = !tex;
+                                            });
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  IconButton(
+                                    color: _pickedImage4 == null
+                                        ? null
+                                        : Colors.deepPurple,
+                                    // hoverColor: Colors.deepPurple.withOpacity(0.3),
+                                    icon: Icon(Icons.save_alt_rounded),
+                                    onPressed: () async {
+                                      _pickedImage4 == null
+                                          ? ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                              duration: Duration(seconds: 2),
+                                              content: Text(
+                                                ' image4  not provided',
+                                              ),
+                                              backgroundColor:
+                                                  Theme.of(context).errorColor,
+                                            ))
+                                          : {
+                                              save4(_pickedImage4!.path
+                                                  .toString())
+                                            };
+                                      setState(() {
+                                        _pickedImage4 = null;
                                       });
                                     },
                                   ),
@@ -627,7 +752,7 @@ class _CustomPic2State extends State<CustomPic2> {
                                             child: ListView.builder(
                                               itemCount: // 2,
                                                   snapshot.data!.length
-                                                      .clamp(0, 3),
+                                                      .clamp(0, 4),
                                               itemBuilder: (ctx, i) => ListTile(
                                                 onTap: () {},
                                                 onLongPress: () {},
@@ -636,19 +761,29 @@ class _CustomPic2State extends State<CustomPic2> {
                                                     File(snapshot.data![i]),
                                                   ),
                                                 ),
-                                                title: snapshot.data![i]
-                                                            .toString() ==
-                                                        imgPath
-                                                    ? Text('image 1')
-                                                    : snapshot.data![i]
+                                                title: snapshot.data!.length ==
+                                                        1
+                                                    ? snapshot.data![i]
                                                                 .toString() ==
-                                                            imgPath2
-                                                        ? Text('image 2')
+                                                            imgPath
+                                                        ? Text('image 1')
                                                         : snapshot.data![i]
                                                                     .toString() ==
-                                                                imgPath3
-                                                            ? Text('image 3')
-                                                            : Text('image x'),
+                                                                imgPath2
+                                                            ? Text('image 2')
+                                                            : snapshot.data![i]
+                                                                        .toString() ==
+                                                                    imgPath3
+                                                                ? Text(
+                                                                    'image 3')
+                                                                : snapshot.data![i]
+                                                                            .toString() ==
+                                                                        imgPath4
+                                                                    ? Text(
+                                                                        'image 4')
+                                                                    : Text(
+                                                                        'image x')
+                                                    : Text('image ${i + 1}'),
 
                                                 // Text('image ${i + 1}'),
                                                 trailing: IconButton(
@@ -691,9 +826,12 @@ class _CustomPic2State extends State<CustomPic2> {
                                                                       ? storage
                                                                           .remove(
                                                                               'image4')
-                                                                      : storage
-                                                                          .remove(
-                                                                              'image5');
+                                                                      : snapshot.data![i].toString() ==
+                                                                              imgPath3
+                                                                          ? storage.remove(
+                                                                              'image5')
+                                                                          : storage
+                                                                              .remove('image6');
                                                               Navigator.of(ctx)
                                                                   .pop(true);
                                                             },
