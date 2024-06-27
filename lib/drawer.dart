@@ -285,6 +285,17 @@ class _AppDrawerrState extends State<AppDrawerr> {
                           },
                           value: hard!,
                         ),
+                        Text(
+                          'need to be at the same millisecond in hit mode\nto win',
+                          textAlign: TextAlign.center,
+                          //    overflow: TextOverflow.visible,
+                          style: TextStyle(
+                              fontFamily: 'Aclonica',
+                              fontSize: 7,
+                              color: hard!
+                                  ? Colors.red
+                                  : Colors.red.withOpacity(0.0)),
+                        ),
                       ],
                     ),
                   ),

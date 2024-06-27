@@ -611,15 +611,23 @@ class _GameState extends State<Game> {
             color: Colors.blue.withOpacity(0.3),
             child: SizedBox.expand(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Platform.isIOS
+                      ? Center(
+                          child: Text(
+                          hard! ? '🔥' : '',
+                          style: TextStyle(fontSize: hard! ? 30 : 1),
+                        ))
+                      : SizedBox(),
                   AnimatedTextKit(
                     animatedTexts: [
                       ColorizeAnimatedText(
-                        '',
-                        textStyle: const TextStyle(fontSize: 14),
+                        Platform.isIOS ? '' : '☠️',
+                        textStyle: TextStyle(fontSize: hard! ? 30 : 1),
                         colors: [
-                          Colors.blue.withOpacity(0.0),
-                          Colors.blue.withOpacity(0.0),
+                          Colors.redAccent.withOpacity(hard! ? 0.7 : 0),
+                          Colors.red.withOpacity(hard! ? 0.7 : 0),
                         ],
                       ),
                     ],
