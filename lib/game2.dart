@@ -88,6 +88,7 @@ class _Game2State extends State<Game2> {
   bool fly = false;
   bool slap = false;
   bool change = false;
+  bool already = true;
 
   bool hold = false;
   int num = 2;
@@ -1121,6 +1122,7 @@ class _Game2State extends State<Game2> {
                             //   slap = !opa ? !slap : slap;
                             // });
                             change = true;
+                            already = false;
                             slap = !opa ? !slap : slap;
                             ////////////////////////////////////////////////////////////// difficulty hold time
                             num = 2;
@@ -1136,6 +1138,7 @@ class _Game2State extends State<Game2> {
                           count();
                           //////////////////////////////////////////
                         } else {
+                          already = true;
                           change = false;
                         }
                       },
@@ -1216,7 +1219,7 @@ class _Game2State extends State<Game2> {
                                 ? Image.file(
                                     File(opa && slap && change
                                         ? imgPath2!
-                                        : slap
+                                        : slap || !already
                                             ? imgPath7!
                                             : imgPath!),
                                     fit: BoxFit.fill,
